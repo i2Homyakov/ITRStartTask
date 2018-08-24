@@ -46,7 +46,7 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     func getCommentItem(atIndex: Int) -> CommentItemModelProtocol? {
-        return 0 < atIndex && atIndex < self.commentItemModels.count
+        return 0 <= atIndex && atIndex < self.commentItemModels.count
             ? commentItemModels[atIndex]
             : nil
     }

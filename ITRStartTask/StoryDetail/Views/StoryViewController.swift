@@ -76,6 +76,10 @@ extension StoryViewController: UITableViewDataSource {
             commentCell.author = commentItem.author
             commentCell.dateString = commentItem.getDateString()
         }
+        else
+        {
+            
+        }
 
         return cell
     }
