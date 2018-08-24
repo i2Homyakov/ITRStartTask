@@ -72,7 +72,7 @@ extension StoryViewController: UITableViewDataSource {
         }
 
         if let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) {
-            commentCell.commentText = commentItem.text
+            commentCell.commentText = commentItem.textAttributedString
             commentCell.author = commentItem.author
             commentCell.dateString = commentItem.getDateString()
         }

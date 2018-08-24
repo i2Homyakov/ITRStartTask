@@ -13,6 +13,6 @@ protocol StoryPresenterProtocol: class {
 
     func getCommentItemsCount () -> Int
 
-    func getCommentItem(atIndex: Int) -> CommentItemProtocol?
+    func getCommentItem(atIndex: Int) -> CommentItemModelProtocol?
 
 }
