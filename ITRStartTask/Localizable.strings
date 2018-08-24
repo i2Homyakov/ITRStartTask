@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  ITRStartTask
+
+  Created by Homyakov, Ilya2 on 15/08/2018.
+  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
+*/
+
+"MessageFailToConnect" = "Check to make sure your device is connected to the internet, and then try again.";
+
+"IncorrectUrl" = "Url is incorrect.";
+
+"IncorrectServerData" = "Incorrect data from server";
+
+"OperationCanceled" = "Operation canceled";
