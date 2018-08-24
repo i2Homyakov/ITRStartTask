@@ -10,7 +10,9 @@ import Foundation
 
 class AsyncOperation: Operation {
     public enum State: String {
-        case ready, executing, finished
+        case ready
+        case executing
+        case finished
 
         fileprivate var keyPath: String {
             return "is" + rawValue.capitalized
