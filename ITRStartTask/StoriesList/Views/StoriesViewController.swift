@@ -23,24 +23,19 @@ class StoriesViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
+
+        self.title = NSLocalizedString("Stories", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.navigationController?.isNavigationBarHidden = true
+//        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("Stories", comment: "")
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         presenter.show()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.navigationController?.isNavigationBarHidden = false
     }
 
     static func xibInstance () -> StoriesViewController {
@@ -75,6 +70,7 @@ extension StoriesViewController: UITableViewDataSource {
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
             cell.title = storyItem.title
+            cell.dateString = storyItem.getDateString()
         }
 
         return cell
