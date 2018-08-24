@@ -2,51 +2,62 @@
 //  AsyncOperation.swift
 //  ITRStartTask
 //
-//  Created by Homyakov, Ilya2 on 22/08/2018.
+//  Created by Homyakov, Ilya2 on 23/08/2018.
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class AsyncOperation: Operation {
-    override var isAsynchronous: Bool {
-        return true
-    }
+    public enum State: String {
+        case ready, executing, finished
 
-    private var isFinishedValue: Bool = false
-    private var isExecutingValue: Bool = false
-
-    override var isFinished: Bool {
-        set {
-            willChangeValue(forKey: "isFinished")
-            isFinishedValue = newValue
-            didChangeValue(forKey: "isFinished")
-        }
-
-        get {
-            return isFinishedValue
+        fileprivate var keyPath: String {
+            return "is" + rawValue.capitalized
         }
     }
 
-    override var isExecuting: Bool {
-        set {
-            willChangeValue(forKey: "isExecuting")
-            isExecutingValue = newValue
-            didChangeValue(forKey: "isExecuting")
+    public var state = State.ready {
+        willSet {
+            willChangeValue(forKey: newValue.keyPath)
+            willChangeValue(forKey: state.keyPath)
         }
-
-        get {
-            return isExecutingValue
+        didSet {
+            didChangeValue(forKey: oldValue.keyPath)
+            didChangeValue(forKey: state.keyPath)
         }
     }
+}
 
-    func execute() {
+extension AsyncOperation {
+    override open var isReady: Bool {
+        return super.isReady && state == .ready
+    }
+
+    override open var isExecuting: Bool {
+        return state == .executing
+    }
+
+    override open var isFinished: Bool {
+        return state == .finished
+    }
+
+    override open var isAsynchronous: Bool {
+        return state == .finished
     }
 
     override func start() {
-        isExecuting = true
-        execute()
-        isExecuting = false
-        isFinished = true
+        if isCancelled {
+            state = .finished
+            return
+        }
+
+        main()
+        state = .executing
+    }
+
+    override open func cancel() {
+        super.cancel()
+        state = .finished
     }
 }

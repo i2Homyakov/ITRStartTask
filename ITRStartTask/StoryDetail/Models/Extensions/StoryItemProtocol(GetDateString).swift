@@ -10,10 +10,10 @@ import UIKit
 
 extension TimeProtocol {
     func getDateString () -> String {
-        let date = NSDate(timeIntervalSince1970: TimeInterval(self.time))
+        let date = Date(timeIntervalSince1970: TimeInterval(self.time))
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
-        let string = formatter.string(from: date as Date)
+        let string = formatter.string(from: date)
 
         return string
     }

@@ -21,21 +21,21 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     func show() {
         if storyItems.count > 0 {
+            self.view.refreshStories()
             return
         }
 
         self.view.showRootProgress()
-        weak var weakSelf = self
 
-        storiesDataProvider.getTopStoryItems(onSuccess: { (storyItems) in
+        storiesDataProvider.getTopStoryItems(onSuccess: { [weak self] (storyItems) in
 
-            weakSelf?.storyItems = storyItems
-            weakSelf?.view.refreshStories()
-            weakSelf?.view.hideRootProgress()
-        }, onFailure: { (error) in
+            self?.storyItems = storyItems
+            self?.view.refreshStories()
+            self?.view.hideRootProgress()
+        }, onFailure: { [weak self] (error) in
 
             print(error.localizedDescription)
-            weakSelf?.view.hideRootProgress()
+            self?.view.hideRootProgress()
         })
     }
 

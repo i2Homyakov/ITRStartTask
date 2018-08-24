@@ -9,6 +9,8 @@
 import UIKit
 
 class StoryViewController: UIViewController {
+    fileprivate static let commentCellId = "commentCell"
+
     var presenter: StoryPresenterProtocol!
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,8 +22,8 @@ class StoryViewController: UIViewController {
         super.viewDidLoad()
 
         self.commentsTableView.dataSource = self
-        self.commentsTableView.register(UINib(nibName: "CommentCell", bundle: nil),
-                                        forCellReuseIdentifier: "commentCell")
+        self.commentsTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
+                                        forCellReuseIdentifier: StoryViewController.commentCellId)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,8 +31,6 @@ class StoryViewController: UIViewController {
 
         presenter.show()
     }
-
-    // otherMethods
 }
 
 extension StoryViewController: StoryViewProtocol {
@@ -61,16 +61,16 @@ extension StoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoryViewController.commentCellId, for: indexPath)
 
         guard let commentCell = cell as? CommentCell else {
             return UITableViewCell(frame: .zero)
         }
 
         if let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) {
-            commentCell.commentTextLabel.attributedText = commentItem.text?.htmlToAttributedString
-            commentCell.authorLabel.text = commentItem.author
-            commentCell.dateLabel.text = commentItem.getDateString()
+            commentCell.commentText = commentItem.text
+            commentCell.author = commentItem.author
+            commentCell.dateString = commentItem.getDateString()
         }
 
         return cell

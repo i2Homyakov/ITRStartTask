@@ -28,17 +28,15 @@ class StoryPresenter: StoryPresenterProtocol {
         self.view.showRootProgress()
 
         if let ids = storyItem.kids {
-            weak var weakSelf = self
+            let ids = ids.count > 5 ? Array(ids[0..<5]) : ids
 
-            commentsDataProvider.getCommentItems(ids: ids, onSuccess: { (commentItems) in
-
-                weakSelf?.commentItems = commentItems
-                weakSelf?.view.refreshComments()
-                weakSelf?.view.hideRootProgress()
-            }, onFailure: { (error) in
-
+            commentsDataProvider.getCommentItems(ids: ids, onSuccess: { [weak self] (commentItems) in
+                self?.commentItems = commentItems
+                self?.view.refreshComments()
+                self?.view.hideRootProgress()
+            }, onFailure: { [weak self] (error) in
                 print(error.localizedDescription)
-                weakSelf?.view.hideRootProgress()
+                self?.view.hideRootProgress()
             })
         }
     }
@@ -48,11 +46,9 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     func getCommentItem(atIndex: Int) -> CommentItemProtocol? {
-        if self.commentItems.indices.contains(atIndex) {
-            return commentItems[atIndex]
-        }
-
-        return nil
+        return 0 < atIndex && atIndex < self.commentItems.count
+            ? commentItems[atIndex]
+            : nil
     }
 
 }

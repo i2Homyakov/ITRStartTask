@@ -33,8 +33,8 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDP-mE-rQz">
-                            <rect key="frame" x="10" y="22.5" width="320" height="24"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDP-mE-rQz">
+                            <rect key="frame" x="16" y="22.5" width="288" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -55,9 +55,9 @@
                         <constraint firstItem="KW2-uT-OeR" firstAttribute="top" secondItem="zB4-LU-oAo" secondAttribute="top" id="Fv5-vf-3m2"/>
                         <constraint firstItem="4x8-5S-GhV" firstAttribute="leading" secondItem="zB4-LU-oAo" secondAttribute="leading" id="Mx2-Kt-Vqr"/>
                         <constraint firstAttribute="bottom" secondItem="4x8-5S-GhV" secondAttribute="bottom" id="Opr-44-v0w"/>
-                        <constraint firstItem="rDP-mE-rQz" firstAttribute="trailing" secondItem="zB4-LU-oAo" secondAttribute="trailing" constant="10" id="Pv5-TD-H8p"/>
+                        <constraint firstAttribute="trailing" secondItem="rDP-mE-rQz" secondAttribute="trailing" constant="16" id="SCf-UY-fTf"/>
                         <constraint firstItem="0f7-Is-Wrf" firstAttribute="centerY" secondItem="zB4-LU-oAo" secondAttribute="centerY" id="rX3-S9-zjh"/>
-                        <constraint firstItem="rDP-mE-rQz" firstAttribute="leading" secondItem="zB4-LU-oAo" secondAttribute="leading" constant="10" id="wfC-xa-6Ys"/>
+                        <constraint firstItem="rDP-mE-rQz" firstAttribute="leading" secondItem="zB4-LU-oAo" secondAttribute="leading" constant="16" id="wfC-xa-6Ys"/>
                         <constraint firstItem="KW2-uT-OeR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zB4-LU-oAo" secondAttribute="leading" id="xdF-Yh-zMb"/>
                         <constraint firstItem="KW2-uT-OeR" firstAttribute="trailing" secondItem="zB4-LU-oAo" secondAttribute="trailing" id="z5V-Yr-8R7"/>
                         <constraint firstItem="rDP-mE-rQz" firstAttribute="top" secondItem="KW2-uT-OeR" secondAttribute="bottom" constant="8" id="zUp-dF-exc"/>

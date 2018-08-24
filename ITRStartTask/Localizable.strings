@@ -9,3 +9,7 @@
 "MessageFailToConnect" = "Check to make sure your device is connected to the internet, and then try again.";
 
 "IncorrectUrl" = "Url is incorrect.";
+
+"IncorrectServerData" = "Incorrect data from server";
+
+"OperationCanceled" = "Operation canceled";

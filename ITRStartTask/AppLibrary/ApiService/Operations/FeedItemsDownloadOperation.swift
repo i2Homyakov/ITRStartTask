@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FeedItemsDownloadOperation<T: Codable>: AsyncOperation {
+class FeedItemsDownloadOperation<T: Codable>: SyncOperation {
     private let queue = OperationQueue()
-    private var operations: [FeedItemDownloadOperation<T>]
+    private var operations: [FeedItemDownloadAsyncOperation<T>]
 
-    init(operations: [FeedItemDownloadOperation<T>]) {
+    init(operations: [FeedItemDownloadAsyncOperation<T>]) {
         self.operations = operations
         super.init()
     }

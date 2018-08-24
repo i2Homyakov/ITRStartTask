@@ -19,18 +19,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foJ-Nk-cuY">
-                        <rect key="frame" x="10" y="0.0" width="310" height="33.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foJ-Nk-cuY">
+                        <rect key="frame" x="16" y="0.0" width="288" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="foJ-Nk-cuY" secondAttribute="trailing" id="IQK-Rr-Cq3"/>
+                    <constraint firstAttribute="trailing" secondItem="foJ-Nk-cuY" secondAttribute="trailing" constant="16" id="IQK-Rr-Cq3"/>
                     <constraint firstAttribute="bottom" secondItem="foJ-Nk-cuY" secondAttribute="bottom" constant="10" id="mee-9y-17S"/>
                     <constraint firstItem="foJ-Nk-cuY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="n2P-ri-ESq"/>
-                    <constraint firstItem="foJ-Nk-cuY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="sP8-X9-kdJ"/>
+                    <constraint firstItem="foJ-Nk-cuY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sP8-X9-kdJ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -9,6 +9,8 @@
 import UIKit
 
 class StoriesViewController: UIViewController {
+    fileprivate static let storyCellId = "storyCell"
+
     var presenter: StoriesPresenterProtocol!
 
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +21,8 @@ class StoriesViewController: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: "StoryCell", bundle: nil), forCellReuseIdentifier: "storyCell")
+        self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
+                                forCellReuseIdentifier: StoriesViewController.storyCellId)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,8 +42,6 @@ class StoriesViewController: UIViewController {
 
         self.navigationController?.isNavigationBarHidden = false
     }
-
-    // otherMethods
 }
 
 extension StoriesViewController: StoriesViewProtocol {
@@ -63,12 +64,13 @@ extension StoriesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "storyCell", for: indexPath) as? StoryCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId,
+                                                       for: indexPath) as? StoryCell else {
             return UITableViewCell(frame: .zero)
         }
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
-            cell.titleUILabel.text = storyItem.title
+            cell.title = storyItem.title
         }
 
         return cell
@@ -80,7 +82,6 @@ extension StoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let storyItem = presenter.getStoryItem(atIndex: indexPath.row) {
             let destination = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
-//            self.navigationController?.show(destination, sender: self)
             self.navigationController?.pushViewController(destination, animated: true)
         }
     }
