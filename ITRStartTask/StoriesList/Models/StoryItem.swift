@@ -20,6 +20,7 @@ struct StoryItem: StoryItemProtocol, Codable {
     let url: String?
     let score: Int?
     let title: String?
+    let text: String?
     let parts: [Int]?
     let descendants: Int?
     enum CodingKeys: String, CodingKey {
@@ -34,6 +35,7 @@ struct StoryItem: StoryItemProtocol, Codable {
         case url
         case score
         case title
+        case text
         case parts
         case descendants
     }

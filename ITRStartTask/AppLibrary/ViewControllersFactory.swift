@@ -10,7 +10,7 @@ import UIKit
 
 class ViewControllersFactory {
     static func getStoriesViewController () -> UIViewController {
-        let view = UIViewController.storiesViewController()
+        let view = StoriesViewController.xibInstance()
         let presenter = StoriesPresenter(view: view, storiesDataProvider: StoriesDataProvider())
         view.presenter = presenter
 
@@ -18,21 +18,11 @@ class ViewControllersFactory {
     }
 
     static func getStoryViewController (storyItem: StoryItemProtocol) -> UIViewController {
-        let view = UIViewController.storyViewController()
+        let view = StoryViewController.xibInstance()
         let presenter = StoryPresenter(view: view, model: storyItem, commentsDataProvider: CommentsDataProvider())
         view.presenter = presenter
 
         return view
     }
 
-}
-
-extension UIViewController {
-    static func storiesViewController () -> StoriesViewController {
-        return StoriesViewController(nibName: "StoriesViewController", bundle: nil)
-    }
-
-    static func storyViewController () -> StoryViewController {
-        return StoryViewController(nibName: "StoryViewController", bundle: nil)
-    }
 }

@@ -53,6 +53,10 @@ extension StoryViewController: StoryViewProtocol {
     func hideRootProgress() {
         rootActivityIndicatorView.stopAnimating()
     }
+
+    static func xibInstance () -> StoryViewController {
+        return StoryViewController(nibName: "StoryViewController", bundle: nil)
+    }
 }
 
 extension StoryViewController: UITableViewDataSource {

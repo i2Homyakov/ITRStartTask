@@ -42,6 +42,10 @@ class StoriesViewController: UIViewController {
 
         self.navigationController?.isNavigationBarHidden = false
     }
+
+    static func xibInstance () -> StoriesViewController {
+        return StoriesViewController(nibName: "StoriesViewController", bundle: nil)
+    }
 }
 
 extension StoriesViewController: StoriesViewProtocol {
