@@ -72,7 +72,6 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if let error = error {
                 onFailure(error)
-
                 return
             }
 
@@ -80,11 +79,9 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
                 do {
                     let ids = try self.deserializer.parseIntArray(fromData: data)
                     onSuccess(ids)
-
                     return
                 } catch let error as NSError {
                     onFailure(error)
-
                     return
                 }
             }
@@ -136,7 +133,6 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
                 for operation in operations {
                     if let error = operation.error {
                         onFailure(error)
-
                         return
                     }
 

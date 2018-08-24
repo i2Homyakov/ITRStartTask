@@ -81,8 +81,8 @@ extension StoriesViewController: UITableViewDataSource {
 extension StoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let storyItem = presenter.getStoryItem(atIndex: indexPath.row) {
-            let destination = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
-            self.navigationController?.pushViewController(destination, animated: true)
+            let storyViewController = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
+            self.navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
 

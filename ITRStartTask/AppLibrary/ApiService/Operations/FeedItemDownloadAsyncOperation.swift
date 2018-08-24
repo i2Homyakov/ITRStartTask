@@ -70,22 +70,21 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             if let error = error {
                 onFailure(error)
-
                 return
             }
 
-            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+            if let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
                 do {
                     if let item: T = try self.deserializer.parse(data: data) {
                         onSuccess(item)
-
                         return
                     }
 
                     onFailure(FeedItemDownloadAsyncOperationError.incorrectData.error())
                 } catch let error as NSError {
                     onFailure(error)
-
                     return
                 }
 

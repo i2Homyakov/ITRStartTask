@@ -22,7 +22,6 @@ class SyncOperation: Operation {
             isFinishedValue = newValue
             didChangeValue(forKey: "isFinished")
         }
-
         get {
             return isFinishedValue
         }
@@ -34,7 +33,6 @@ class SyncOperation: Operation {
             isExecutingValue = newValue
             didChangeValue(forKey: "isExecuting")
         }
-
         get {
             return isExecutingValue
         }

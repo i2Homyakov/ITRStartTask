@@ -12,7 +12,6 @@ class FeedItemDeserializer: FeedItemDeserializerProtocol {
     func parse <T: Codable>(data: Data)throws -> T? {
         let decoder = JSONDecoder()
         let item: T?  = try decoder.decode(T.self, from: data)
-
         return item
     }
 
