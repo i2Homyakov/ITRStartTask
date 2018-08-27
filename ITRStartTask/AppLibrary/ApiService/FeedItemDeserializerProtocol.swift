@@ -6,13 +6,11 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
-
-typealias IntArray = [Int]
+import Foundation
 
 protocol FeedItemDeserializerProtocol {
     func parse <T: Codable>(data: Data) throws -> T?
 
-    func parseIntArray(fromData: Data) throws -> [Int]
+    func parseArray <T: Codable>(fromData: Data) throws -> [T]
 
 }

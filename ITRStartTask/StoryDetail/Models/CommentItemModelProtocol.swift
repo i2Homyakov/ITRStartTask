@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CommentItemModelProtocol: TimeProtocol {
+protocol CommentItemModelProtocol {
     var textAttributedString: NSAttributedString? { get }
     var author: String? { get }
 

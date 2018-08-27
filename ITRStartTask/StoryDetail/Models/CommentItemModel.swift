@@ -10,20 +10,20 @@ import Foundation
 
 class CommentItemModel: CommentItemModelProtocol {
     private(set) var author: String?
-    private(set) var time: Int64
+    private(set) var time: Date
     private(set) var textAttributedString: NSAttributedString?
 
     init(commentItem: CommentItem) {
         textAttributedString = commentItem.text?.htmlToAttributedString
         author = commentItem.author
-        time = commentItem.time
+        time = commentItem.getDate()
     }
 
     func getFormattedDateString () -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self.time))
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
-        let string = formatter.string(from: date)
+
+        let string = formatter.string(from: self.time)
 
         return string
     }

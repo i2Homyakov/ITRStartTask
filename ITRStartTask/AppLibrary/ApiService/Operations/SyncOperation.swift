@@ -6,15 +6,15 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class SyncOperation: Operation {
     override var isAsynchronous: Bool {
         return false
     }
 
-    private var isFinishedValue: Bool = false
-    private var isExecutingValue: Bool = false
+    private var isFinishedValue = false
+    private var isExecutingValue = false
 
     override var isFinished: Bool {
         set {

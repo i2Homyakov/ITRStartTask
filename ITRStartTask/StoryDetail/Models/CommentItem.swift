@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct CommentItem: CommentItemProtocol, Codable {
     let identifier: Int

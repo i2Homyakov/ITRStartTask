@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class FeedItemsDownloadOperation<T: Codable>: SyncOperation {
     private let queue = OperationQueue()

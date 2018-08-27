@@ -253,11 +253,11 @@
 		156B255F212FD568002F65B3 /* ApiService */ = {
 			isa = PBXGroup;
 			children = (
+				156B2564212FD568002F65B3 /* Operations */,
 				156B2560212FD568002F65B3 /* FeedItemDeserializerProtocol.swift */,
 				156B2561212FD568002F65B3 /* ApiService.swift */,
 				156B2562212FD568002F65B3 /* CommentsApiServiceProtocol.swift */,
 				156B2563212FD568002F65B3 /* StoriesApiServiceProtocol.swift */,
-				156B2564212FD568002F65B3 /* Operations */,
 				156B256B212FD568002F65B3 /* FeedItemDeserializer.swift */,
 			);
 			path = ApiService;

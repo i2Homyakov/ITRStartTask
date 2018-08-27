@@ -44,7 +44,7 @@ class StoriesViewController: UIViewController {
     }
 
     static func xibInstance () -> StoriesViewController {
-        return StoriesViewController(nibName: "StoriesViewController", bundle: nil)
+        return StoriesViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -90,4 +90,8 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
+}
+
+extension StoriesViewController {
+    static let nibName = "StoriesViewController"
 }

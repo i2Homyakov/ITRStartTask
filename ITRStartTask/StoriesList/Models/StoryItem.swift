@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct StoryItem: StoryItemProtocol, Codable {
     let identifier: Int
@@ -38,5 +38,15 @@ struct StoryItem: StoryItemProtocol, Codable {
         case text
         case parts
         case descendants
+    }
+
+    func getDateString () -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
+
+        let date = self.getDate()
+        let string = formatter.string(from: date)
+
+        return string
     }
 }

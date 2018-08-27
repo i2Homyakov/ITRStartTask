@@ -31,6 +31,10 @@ class StoryViewController: UIViewController {
 
         presenter.show()
     }
+
+    static func xibInstance () -> StoryViewController {
+        return StoryViewController(nibName: self.nibName, bundle: nil)
+    }
 }
 
 extension StoryViewController: StoryViewProtocol {
@@ -53,10 +57,6 @@ extension StoryViewController: StoryViewProtocol {
     func hideRootProgress() {
         rootActivityIndicatorView.stopAnimating()
     }
-
-    static func xibInstance () -> StoryViewController {
-        return StoryViewController(nibName: "StoryViewController", bundle: nil)
-    }
 }
 
 extension StoryViewController: UITableViewDataSource {
@@ -71,17 +71,18 @@ extension StoryViewController: UITableViewDataSource {
             return UITableViewCell(frame: .zero)
         }
 
-        if let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) {
-            commentCell.commentText = commentItem.textAttributedString
-            commentCell.author = commentItem.author
-            commentCell.dateString = commentItem.getDateString()
+        guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
+            return UITableViewCell(frame: .zero)
         }
-        else
-        {
-            
-        }
+
+        commentCell.commentText = commentItem.textAttributedString
+        commentCell.author = commentItem.author
+        commentCell.dateString = commentItem.getFormattedDateString()
 
         return cell
     }
+}
 
+extension StoryViewController {
+    static let nibName = "StoryViewController"
 }

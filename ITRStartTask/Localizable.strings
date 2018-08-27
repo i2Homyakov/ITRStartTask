@@ -13,3 +13,5 @@
 "IncorrectServerData" = "Incorrect data from server";
 
 "OperationCanceled" = "Operation canceled";
+
+"UnknownError" = "Unknown error";

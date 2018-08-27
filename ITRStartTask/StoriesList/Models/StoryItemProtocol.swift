@@ -11,4 +11,6 @@ import Foundation
 protocol StoryItemProtocol: TimeProtocol {
     var title: String? { get }
     var kids: [Int]? { get }
+
+    func getDateString () -> String
 }

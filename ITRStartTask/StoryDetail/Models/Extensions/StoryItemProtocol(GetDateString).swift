@@ -6,15 +6,10 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension TimeProtocol {
-    func getDateString () -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(self.time))
-        let formatter = DateFormatter()
-        formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
-        let string = formatter.string(from: date)
-
-        return string
+    func getDate () -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(self.time))
     }
 }
