@@ -14,16 +14,16 @@ class StoryViewController: UIViewController {
 
     var presenter: StoryPresenterProtocol!
 
-    @IBOutlet weak var commentsTableView: UITableView!
+    @IBOutlet weak var rootTableView: UITableView!
     @IBOutlet weak var rootActivityIndicatorView: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.commentsTableView.dataSource = self
-        self.commentsTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
+        self.rootTableView.dataSource = self
+        self.rootTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.commentCellId)
-        self.commentsTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
+        self.rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.headerCellId)
 
         self.title = NSLocalizedString("Story", comment: "")
@@ -40,6 +40,10 @@ class StoryViewController: UIViewController {
         presenter.show()
     }
 
+    static func xibInstance () -> StoryViewController {
+        return StoryViewController(nibName: self.nibName, bundle: nil)
+    }
+
     private func replaceBackButton() {
         let button = UIBarButtonItem(image: UIImage(named: "BackButton"),
                                      style: UIBarButtonItemStyle.plain,
@@ -53,7 +57,7 @@ class StoryViewController: UIViewController {
 
 extension StoryViewController: StoryViewProtocol {
     func refreshComments() {
-        self.commentsTableView.reloadData()
+        self.rootTableView.reloadData()
     }
 
     func showRootProgress() {
@@ -62,10 +66,6 @@ extension StoryViewController: StoryViewProtocol {
 
     func hideRootProgress() {
         rootActivityIndicatorView.stopAnimating()
-    }
-
-    static func xibInstance () -> StoryViewController {
-        return StoryViewController(nibName: "StoryViewController", bundle: nil)
     }
 }
 
@@ -107,5 +107,8 @@ extension StoryViewController: UITableViewDataSource {
 
         return cell
     }
+}
 
+extension StoryViewController {
+    static let nibName = "StoryViewController"
 }

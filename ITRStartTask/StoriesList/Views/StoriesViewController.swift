@@ -19,17 +19,14 @@ class StoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("Stories", comment: "")
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
-
-        self.title = NSLocalizedString("Stories", comment: "")
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("Stories", comment: "")
+        self.tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -39,7 +36,7 @@ class StoriesViewController: UIViewController {
     }
 
     static func xibInstance () -> StoriesViewController {
-        return StoriesViewController(nibName: "StoriesViewController", bundle: nil)
+        return StoriesViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -86,4 +83,8 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
+}
+
+extension StoriesViewController {
+    static let nibName = "StoriesViewController"
 }
