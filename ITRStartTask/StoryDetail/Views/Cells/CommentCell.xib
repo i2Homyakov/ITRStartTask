@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uG9-tU-KKa">
-                        <rect key="frame" x="16" y="8" width="288" height="37.5"/>
+                        <rect key="frame" x="16" y="0.0" width="288" height="53.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yna-Yn-6xs">
-                                <rect key="frame" x="0.0" y="0.0" width="288" height="14.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="19.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="x13-Ah-dgZ">
                                         <rect key="frame" x="0.0" y="0.0" width="67.5" height="14.5"/>

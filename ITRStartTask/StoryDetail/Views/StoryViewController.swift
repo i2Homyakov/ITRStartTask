@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryViewController: UIViewController {
+class StoryViewController: UIViewController, XibInitializable {
     fileprivate static let commentCellId = "commentCell"
     fileprivate static let headerCellId = "headerCell"
 
@@ -86,11 +86,13 @@ extension StoryViewController: UITableViewDataSource {
                 return UITableViewCell(frame: .zero)
             }
 
-            if let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) {
-                commentCell.commentText = commentItem.text
-                commentCell.author = commentItem.author
-                commentCell.dateString = commentItem.getDateString()
+        guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
+            return UITableViewCell(frame: .zero)
             }
+
+        commentCell.commentText = commentItem.textAttributedString
+        commentCell.author = commentItem.author
+        commentCell.dateString = commentItem.getFormattedDateString()
 
             return cell
         }

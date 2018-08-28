@@ -6,12 +6,12 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol StoriesPresenterProtocol {
-    func show ()
+    func show()
 
-    func getStoryItemsCount () -> Int
+    func getStoryItemsCount() -> Int
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol?
 

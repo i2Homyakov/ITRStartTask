@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -8,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoryViewController" customModule="ITRStartTask" customModuleProvider="target">
             <connections>
-                <outlet property="rootActivityIndicatorView" destination="0f7-Is-Wrf" id="jnu-HO-fMZ"/>
-                <outlet property="rootTableView" destination="4x8-5S-GhV" id="hdR-Gf-uMM"/>
+                <outlet property="rootActivityIndicatorView" destination="0f7-Is-Wrf" id="fg4-x7-PbO"/>
+                <outlet property="rootTableView" destination="4x8-5S-GhV" id="Qy9-wC-beN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,11 +35,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="4x8-5S-GhV" firstAttribute="top" secondItem="zB4-LU-oAo" secondAttribute="top" id="5Q0-qI-Rax"/>
                         <constraint firstAttribute="trailing" secondItem="4x8-5S-GhV" secondAttribute="trailing" id="5Vp-7U-Yjp"/>
                         <constraint firstItem="0f7-Is-Wrf" firstAttribute="centerX" secondItem="zB4-LU-oAo" secondAttribute="centerX" id="CyM-Ms-YIW"/>
                         <constraint firstItem="4x8-5S-GhV" firstAttribute="leading" secondItem="zB4-LU-oAo" secondAttribute="leading" id="Mx2-Kt-Vqr"/>
                         <constraint firstAttribute="bottom" secondItem="4x8-5S-GhV" secondAttribute="bottom" id="Opr-44-v0w"/>
+                        <constraint firstItem="4x8-5S-GhV" firstAttribute="top" secondItem="zB4-LU-oAo" secondAttribute="top" id="bIB-oE-1Bu"/>
                         <constraint firstItem="0f7-Is-Wrf" firstAttribute="centerY" secondItem="zB4-LU-oAo" secondAttribute="centerY" id="rX3-S9-zjh"/>
                     </constraints>
                 </view>

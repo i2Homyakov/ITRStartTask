@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoriesViewController: UIViewController {
+class StoriesViewController: UIViewController, XibInitializable {
     fileprivate static let storyCellId = "storyCell"
 
     var presenter: StoriesPresenterProtocol!
@@ -33,6 +33,12 @@ class StoriesViewController: UIViewController {
         super.viewDidAppear(animated)
 
         presenter.show()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.navigationController?.isNavigationBarHidden = false
     }
 
     static func xibInstance () -> StoriesViewController {

@@ -9,16 +9,16 @@
 import UIKit
 
 class ViewControllersFactory {
-    static func getStoriesViewController () -> UIViewController {
-        let view = StoriesViewController.xibInstance()
+    static func getStoriesViewController() -> UIViewController {
+        let view: StoriesViewController = StoriesViewController.xibInstance()
         let presenter = StoriesPresenter(view: view, storiesDataProvider: StoriesDataProvider())
         view.presenter = presenter
 
         return view
     }
 
-    static func getStoryViewController (storyItem: StoryItemProtocol) -> UIViewController {
-        let view = StoryViewController.xibInstance()
+    static func getStoryViewController(storyItem: StoryItemProtocol) -> UIViewController {
+        let view: StoryViewController = StoryViewController.xibInstance()
         let presenter = StoryPresenter(view: view, model: storyItem, commentsDataProvider: CommentsDataProvider())
         view.presenter = presenter
 
