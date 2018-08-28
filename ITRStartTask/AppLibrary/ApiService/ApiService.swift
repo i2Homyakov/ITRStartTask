@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
+class ApiService {
     enum StoriesApiServiceError: Int {
         case not200
         case incorrectData
@@ -33,18 +33,6 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
 
     private static let feedItemUrl = "https://hacker-news.firebaseio.com/v0/item"
     private static let feedItemsUrl = "https://hacker-news.firebaseio.com/v0"
-
-    func getStoryItems(ids: [Int],
-                       onSuccess: @escaping ([StoryItem]) -> Void,
-                       onFailure: @escaping (Error) -> Void) {
-        getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
-    }
-
-    func getCommentItems(ids: [Int],
-                         onSuccess: @escaping ([CommentItem]) -> Void,
-                         onFailure: @escaping (Error) -> Void) {
-        getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
-    }
 
     func getStoryAllIds(forCategory category: String,
                         onSuccess: @escaping ([Int]) -> Void,
@@ -122,7 +110,7 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
     }
 }
 
-extension ApiService {
+extension ApiService: StoriesApiServiceProtocol {
     func getTopStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
                            onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.topStories.name()
@@ -139,5 +127,19 @@ extension ApiService {
                             onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.bestStories.name()
         self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+    }
+
+    func getStoryItems(ids: [Int],
+                       onSuccess: @escaping ([StoryItem]) -> Void,
+                       onFailure: @escaping (Error) -> Void) {
+        getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
+    }
+}
+
+extension ApiService: CommentsApiServiceProtocol {
+    func getCommentItems(ids: [Int],
+                         onSuccess: @escaping ([CommentItem]) -> Void,
+                         onFailure: @escaping (Error) -> Void) {
+        getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
     }
 }

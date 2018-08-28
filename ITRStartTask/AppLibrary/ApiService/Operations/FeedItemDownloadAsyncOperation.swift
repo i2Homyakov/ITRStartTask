@@ -45,7 +45,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
         }
     }
 
-    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer ()
+    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     var url: URL
     var storyItem: T?
