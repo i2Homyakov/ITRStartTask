@@ -9,6 +9,8 @@
 import Foundation
 
 class StoryPresenter: StoryPresenterProtocol {
+    static let maxIdsNumber = 5
+
     var view: StoryViewProtocol
     var storyItem: StoryItemProtocol
     private var commentsDataProvider: CommentsDataProviderProtocol
@@ -28,7 +30,8 @@ class StoryPresenter: StoryPresenterProtocol {
         self.view.showRootProgress()
 
         if let ids = storyItem.kids {
-            let ids = ids.count > 5 ? Array(ids[0..<5]) : ids
+            let maxIdsNumber = StoriesDataProvider.maxIdsNumber
+            let ids = ids.count > maxIdsNumber ? Array(ids[0..<maxIdsNumber]) : ids
 
             commentsDataProvider.getCommentItems(ids: ids, onSuccess: { [weak self] (commentItems) in
                 self?.commentItemModels = commentItems.map {CommentItemModel(commentItem: $0)}

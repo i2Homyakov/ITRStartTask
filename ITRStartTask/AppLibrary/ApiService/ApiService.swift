@@ -19,7 +19,17 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
         }
     }
 
-    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer ()
+    enum StoriesCategory: String {
+        case topStories = "topstories"
+        case newStories = "newstories"
+        case bestStories = "beststories"
+
+        func name() -> String {
+            return self.rawValue
+        }
+    }
+
+    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     private static let feedItemUrl = "https://hacker-news.firebaseio.com/v0/item"
     private static let feedItemsUrl = "https://hacker-news.firebaseio.com/v0"
@@ -36,10 +46,10 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
         getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
     }
 
-    func getStoryAllIds(type: String,
+    func getStoryAllIds(forCategory category: String,
                         onSuccess: @escaping ([Int]) -> Void,
                         onFailure: @escaping (Error) -> Void) {
-        let urlString = "\(ApiService.feedItemsUrl)/\(type).json?"
+        let urlString = "\(ApiService.feedItemsUrl)/\(category).json?"
         let url = URL(string: urlString)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if let error = error {
@@ -68,7 +78,7 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
         task.resume()
     }
 
-    func getGeedItemUrls (forIds ids: [Int]) -> [URL] {
+    func getFeedItemUrls(forIds ids: [Int]) -> [URL] {
         var urls: [URL] = []
 
         for identifier in ids {
@@ -85,7 +95,7 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
     func getFeedItems<T: Codable>(byIds ids: [Int],
                                   onSuccess: @escaping ([T]) -> Void,
                                   onFailure: @escaping (Error) -> Void) {
-        let urls = getGeedItemUrls(forIds: ids)
+        let urls = getFeedItemUrls(forIds: ids)
         let operations = FeedItemDownloadAsyncOperation<T>.operationsWith(urls: urls)
         let groupOperation = FeedItemsDownloadOperation(operations: operations)
 
@@ -109,5 +119,25 @@ class ApiService: StoriesApiServiceProtocol, CommentsApiServiceProtocol {
         DispatchQueue.global().async {
             groupOperation.start()
         }
+    }
+}
+
+extension ApiService {
+    func getTopStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                           onFailure: @escaping (Error) -> Void) {
+        let type = StoriesCategory.topStories.name()
+        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+    }
+
+    func getNewStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                           onFailure: @escaping (Error) -> Void) {
+        let type = StoriesCategory.newStories.name()
+        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+    }
+
+    func getBestStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                            onFailure: @escaping (Error) -> Void) {
+        let type = StoriesCategory.bestStories.name()
+        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
     }
 }

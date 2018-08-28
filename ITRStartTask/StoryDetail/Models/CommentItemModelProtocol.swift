@@ -12,5 +12,5 @@ protocol CommentItemModelProtocol {
     var textAttributedString: NSAttributedString? { get }
     var author: String? { get }
 
-    func getFormattedDateString () -> String
+    func getFormattedDateString() -> String
 }

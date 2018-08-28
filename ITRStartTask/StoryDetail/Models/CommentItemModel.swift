@@ -19,7 +19,7 @@ class CommentItemModel: CommentItemModelProtocol {
         time = commentItem.getDate()
     }
 
-    func getFormattedDateString () -> String {
+    func getFormattedDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
 

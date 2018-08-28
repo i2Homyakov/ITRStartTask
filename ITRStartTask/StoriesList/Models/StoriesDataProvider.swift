@@ -15,7 +15,7 @@ class StoriesDataProvider: StoriesDataProviderProtocol {
     func getTopStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
                           onFailure: @escaping (Error) -> Void) {
 
-        apiServiceClient.getTopStoryAllIds (onSuccess: { [weak self] (ids) in
+        apiServiceClient.getTopStoryAllIds(onSuccess: { [weak self] (ids) in
             let maxIdsNumber = StoriesDataProvider.maxIdsNumber
             let ids = ids.count > maxIdsNumber ? Array(ids[0..<maxIdsNumber]) : ids
 

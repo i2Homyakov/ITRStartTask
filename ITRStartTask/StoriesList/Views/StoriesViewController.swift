@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoriesViewController: UIViewController {
+class StoriesViewController: UIViewController, XibInitializable {
     fileprivate static let storyCellId = "storyCell"
 
     var presenter: StoriesPresenterProtocol!
@@ -41,10 +41,6 @@ class StoriesViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         self.navigationController?.isNavigationBarHidden = false
-    }
-
-    static func xibInstance () -> StoriesViewController {
-        return StoriesViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -90,8 +86,4 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
-}
-
-extension StoriesViewController {
-    static let nibName = "StoriesViewController"
 }

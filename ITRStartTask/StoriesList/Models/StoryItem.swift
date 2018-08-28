@@ -40,7 +40,7 @@ struct StoryItem: StoryItemProtocol, Codable {
         case descendants
     }
 
-    func getDateString () -> String {
+    func getDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
 

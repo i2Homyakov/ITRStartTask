@@ -51,7 +51,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
     var storyItem: T?
     var error: Error?
 
-    init (url: URL) {
+    init(url: URL) {
         self.url = url
         super.init()
     }
@@ -99,6 +99,8 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
 
             if data == nil {
                 onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+
+                return
             }
 
             onFailure(FeedItemDownloadAsyncOperationError.unknownError.error())
@@ -109,7 +111,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
 }
 
 extension FeedItemDownloadAsyncOperation {
-    static func operationsWith (urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
+    static func operationsWith(urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
         return urls.map {FeedItemDownloadAsyncOperation(url: $0)}
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryViewController: UIViewController {
+class StoryViewController: UIViewController, XibInitializable {
     fileprivate static let commentCellId = "commentCell"
 
     var presenter: StoryPresenterProtocol!
@@ -30,10 +30,6 @@ class StoryViewController: UIViewController {
         super.viewWillAppear(animated)
 
         presenter.show()
-    }
-
-    static func xibInstance () -> StoryViewController {
-        return StoryViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -81,8 +77,4 @@ extension StoryViewController: UITableViewDataSource {
 
         return cell
     }
-}
-
-extension StoryViewController {
-    static let nibName = "StoryViewController"
 }

@@ -9,9 +9,9 @@
 import Foundation
 
 protocol StoriesPresenterProtocol {
-    func show ()
+    func show()
 
-    func getStoryItemsCount () -> Int
+    func getStoryItemsCount() -> Int
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol?
 

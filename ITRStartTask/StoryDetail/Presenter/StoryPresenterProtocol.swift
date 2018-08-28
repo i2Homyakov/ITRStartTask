@@ -11,7 +11,7 @@ import Foundation
 protocol StoryPresenterProtocol: class {
     func show()
 
-    func getCommentItemsCount () -> Int
+    func getCommentItemsCount() -> Int
 
     func getCommentItem(atIndex: Int) -> CommentItemModelProtocol?
 
