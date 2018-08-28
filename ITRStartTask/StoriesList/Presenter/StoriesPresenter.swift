@@ -27,7 +27,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
         self.view.showRootProgress()
 
-        storiesDataProvider.getTopStoryItems(onSuccess: { [weak self] (storyItems) in
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
             self?.storyItems = storyItems
             self?.view.refreshStories()
             self?.view.hideRootProgress()

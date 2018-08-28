@@ -19,8 +19,6 @@ class StoriesViewController: UIViewController, XibInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Stories", comment: "")
-
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
@@ -39,10 +37,6 @@ class StoriesViewController: UIViewController, XibInitializable {
         super.viewWillDisappear(animated)
 
         self.navigationController?.isNavigationBarHidden = false
-    }
-
-    static func xibInstance () -> StoriesViewController {
-        return StoriesViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -89,8 +83,4 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
-}
-
-extension StoriesViewController {
-    static let nibName = "StoriesViewController"
 }
