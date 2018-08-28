@@ -44,7 +44,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     }
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol? {
-        if self.storyItems.indices.contains(atIndex) {
+        if 0 <= atIndex && atIndex < self.storyItems.count {
             return storyItems[atIndex]
         }
 

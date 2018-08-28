@@ -19,16 +19,14 @@ class StoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("Stories", comment: "")
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.navigationController?.isNavigationBarHidden = true
+        self.tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,10 +35,8 @@ class StoriesViewController: UIViewController {
         presenter.show()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.navigationController?.isNavigationBarHidden = false
+    static func xibInstance () -> StoriesViewController {
+        return StoriesViewController(nibName: self.nibName, bundle: nil)
     }
 }
 
@@ -71,6 +67,7 @@ extension StoriesViewController: UITableViewDataSource {
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
             cell.title = storyItem.title
+            cell.dateString = storyItem.getDateString()
         }
 
         return cell
@@ -86,4 +83,8 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
+}
+
+extension StoriesViewController {
+    static let nibName = "StoriesViewController"
 }
