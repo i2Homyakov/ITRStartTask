@@ -15,4 +15,6 @@ protocol StoryPresenterProtocol: class {
 
     func getCommentItem(atIndex: Int) -> CommentItemModelProtocol?
 
+    func getStoryItem() -> StoryItemProtocol?
+
 }

@@ -24,9 +24,6 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     func show() {
-        view.setDate(withString: storyItem.getDateString())
-        view.set(title: storyItem.title)
-
         self.view.showRootProgress()
 
         if let ids = storyItem.kids {
@@ -52,6 +49,10 @@ class StoryPresenter: StoryPresenterProtocol {
         return 0 <= atIndex && atIndex < self.commentItemModels.count
             ? commentItemModels[atIndex]
             : nil
+    }
+
+    func getStoryItem() -> StoryItemProtocol? {
+        return storyItem
     }
 
 }

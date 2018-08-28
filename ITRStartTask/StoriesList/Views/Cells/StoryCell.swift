@@ -9,6 +9,7 @@
 import UIKit
 
 class StoryCell: UITableViewCell {
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleUILabel: UILabel!
 
     var title: String? {
@@ -17,6 +18,15 @@ class StoryCell: UITableViewCell {
         }
         get {
             return titleUILabel.text
+        }
+    }
+
+    var dateString: String? {
+        set {
+            dateLabel.text = newValue
+        }
+        get {
+            return dateLabel.text
         }
     }
 }

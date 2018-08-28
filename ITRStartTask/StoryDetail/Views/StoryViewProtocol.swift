@@ -9,10 +9,6 @@
 import Foundation
 
 protocol StoryViewProtocol {
-    func setDate(withString: String)
-
-    func set(title: String?)
-
     func refreshComments()
 
     func showRootProgress()
