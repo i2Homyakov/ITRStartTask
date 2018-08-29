@@ -72,7 +72,6 @@ extension StoriesViewController: UITableViewDataSource {
 
         return cell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
@@ -82,5 +81,4 @@ extension StoriesViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
-
 }
