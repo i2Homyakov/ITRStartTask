@@ -25,4 +25,10 @@ class ViewControllersFactory {
         return view
     }
 
+    static func getAnimationLaunchScreen() -> UIViewController {
+        let animationLaunchScreen: AnimationLaunchScreen = AnimationLaunchScreen.xibInstance()
+        animationLaunchScreen.modalPresentationStyle = .overFullScreen
+
+        return animationLaunchScreen
+    }
 }

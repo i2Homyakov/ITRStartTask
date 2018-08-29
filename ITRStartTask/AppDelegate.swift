@@ -18,11 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
+        let animationLaunchScreen = ViewControllersFactory.getAnimationLaunchScreen()
+
         let rootViewController = ViewControllersFactory.getStoriesViewController()
         let navigationVontroller = UINavigationController(rootViewController: rootViewController)
 
         window.rootViewController = navigationVontroller
         window.makeKeyAndVisible()
+        rootViewController.present(animationLaunchScreen, animated: false, completion: nil)
 
         return true
     }
