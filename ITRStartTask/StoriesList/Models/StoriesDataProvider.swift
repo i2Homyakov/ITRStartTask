@@ -9,7 +9,7 @@
 import Foundation
 
 class StoriesDataProvider: StoriesDataProviderProtocol {
-    static let maxIdsNumber = 5
+    static let maxIdsNumber = 30
     private var apiServiceClient: StoriesApiServiceProtocol = ApiService()
 
     func getTopStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
