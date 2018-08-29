@@ -6,9 +6,9 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol StoriesDataProviderProtocol {
-    func getTopStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
-                          onFailure: @escaping (Error) -> Void)
+    func getStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
+                       onFailure: @escaping (Error) -> Void)
 }

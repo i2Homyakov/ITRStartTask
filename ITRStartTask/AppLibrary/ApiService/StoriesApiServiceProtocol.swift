@@ -6,11 +6,17 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol StoriesApiServiceProtocol {
-    func getTopStoryIds(onSuccess: @escaping ([Int]) -> Void,
-                        onFailure: @escaping (Error) -> Void)
+    func getTopStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                           onFailure: @escaping (Error) -> Void)
+
+    func getNewStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                           onFailure: @escaping (Error) -> Void)
+
+    func getBestStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
+                            onFailure: @escaping (Error) -> Void)
 
     func getStoryItems(ids: [Int],
                        onSuccess: @escaping ([StoryItem]) -> Void,

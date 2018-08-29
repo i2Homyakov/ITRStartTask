@@ -29,12 +29,12 @@ class CommentCell: UITableViewCell {
             return authorLabel.text
         }
     }
-    var commentText: String? {
+    var commentText: NSAttributedString? {
         set {
-            commentTextLabel.text = newValue
+            commentTextLabel.attributedText = newValue
         }
         get {
-            return commentTextLabel.text
+            return commentTextLabel.attributedText
         }
     }
 

@@ -13,39 +13,39 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
         case not200
         case incorrectData
         case operationCanceled
+        case unknownError
 
         func errorCode() -> Int {
             return self.rawValue
         }
 
-        func error() -> Error {
+        func errorLocalizedDescription() -> String {
             switch self {
             case .not200:
-                let errorString = NSLocalizedString("MessageFailToConnect", comment: "")
-                return NSError.init(domain: "ServiceClientError",
-                                    code: FeedItemDownloadAsyncOperationError.not200.errorCode(),
-                                    userInfo: ["localizedDescription": errorString])
+                return NSLocalizedString("MessageFailToConnect", comment: "")
             case .incorrectData:
-                let localizedDescription = NSLocalizedString("IncorrectServerData", comment: "")
-                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                    code: FeedItemDownloadAsyncOperationError.incorrectData.errorCode(),
-                                    userInfo: ["localizedDescription": localizedDescription])
+                return NSLocalizedString("IncorrectServerData", comment: "")
             case .operationCanceled:
-                let localizedDescription = NSLocalizedString("OperationCanceled", comment: "")
-                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                    code: FeedItemDownloadAsyncOperationError.operationCanceled.errorCode(),
-                                    userInfo: ["localizedDescription": localizedDescription])
+                return NSLocalizedString("OperationCanceled", comment: "")
+            case .unknownError:
+                return NSLocalizedString("UnknownError", comment: "")
             }
+        }
+
+        func error() -> Error {
+            return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
+                                code: self.errorCode(),
+                                userInfo: ["localizedDescription": self.errorLocalizedDescription()])
         }
     }
 
-    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer ()
+    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     var url: URL
     var storyItem: T?
     var error: Error?
 
-    init (url: URL) {
+    init(url: URL) {
         self.url = url
         super.init()
     }
@@ -91,7 +91,13 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
                 return
             }
 
-            onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+            if data == nil {
+                onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+
+                return
+            }
+
+            onFailure(FeedItemDownloadAsyncOperationError.unknownError.error())
         }
 
         task.resume()
@@ -99,7 +105,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
 }
 
 extension FeedItemDownloadAsyncOperation {
-    static func operationsWith (urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
+    static func operationsWith(urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
         return urls.map {FeedItemDownloadAsyncOperation(url: $0)}
     }
 }

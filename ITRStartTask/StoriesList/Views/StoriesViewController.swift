@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoriesViewController: UIViewController {
+class StoriesViewController: UIViewController, XibInitializable {
     fileprivate static let storyCellId = "storyCell"
 
     var presenter: StoriesPresenterProtocol!
@@ -21,14 +21,10 @@ class StoriesViewController: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.navigationController?.isNavigationBarHidden = true
+        self.tableView.tableFooterView = UIView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -71,11 +67,11 @@ extension StoriesViewController: UITableViewDataSource {
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
             cell.title = storyItem.title
+            cell.dateString = storyItem.getDateString()
         }
 
         return cell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
@@ -85,5 +81,4 @@ extension StoriesViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
-
 }

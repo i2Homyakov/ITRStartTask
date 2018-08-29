@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class StoriesPresenter: StoriesPresenterProtocol {
     unowned let view: StoriesViewProtocol
@@ -27,8 +27,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
         self.view.showRootProgress()
 
-        storiesDataProvider.getTopStoryItems(onSuccess: { [weak self] (storyItems) in
-
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
             self?.storyItems = storyItems
             self?.view.refreshStories()
             self?.view.hideRootProgress()
@@ -44,7 +43,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     }
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol? {
-        if self.storyItems.indices.contains(atIndex) {
+        if 0 <= atIndex && atIndex < storyItems.count {
             return storyItems[atIndex]
         }
 
