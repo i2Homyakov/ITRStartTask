@@ -6,17 +6,27 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class StoriesPresenter: StoriesPresenterProtocol {
-    unowned let view: StoriesViewProtocol
-    private var storiesDataProvider: StoriesDataProviderProtocol
     fileprivate var storyItems: [StoryItem]
+    unowned let view: StoriesViewProtocol
 
-    init(view: StoriesViewProtocol, storiesDataProvider: StoriesDataProviderProtocol) {
-        self.view = view
-        self.storiesDataProvider = storiesDataProvider
+    private var storiesDataProvider: StoriesDataProviderProtocol
+    private var storyImagesProvider: StoryImagesProviderProtocol
+
+    var imageSetters: [Int: (UIImage?, Error?) -> Void]
+
+    init(view: StoriesViewProtocol,
+         storiesDataProvider: StoriesDataProviderProtocol,
+         storyImagesProvider: StoryImagesProviderProtocol) {
         self.storyItems = []
+        self.view = view
+
+        self.storiesDataProvider = storiesDataProvider
+        self.storyImagesProvider = storyImagesProvider
+
+        imageSetters = [:]
     }
 
     func show() {
@@ -48,5 +58,25 @@ class StoriesPresenter: StoriesPresenterProtocol {
         }
 
         return nil
+    }
+
+    func getImage(atIndex index: Int,
+                  onComplete: @escaping (UIImage?, Error?) -> Void) {
+        if imageSetters[index] != nil {
+            return
+        }
+
+        imageSetters[index] = onComplete
+        let urlString = getStoryItem(atIndex: index)?.imageUrl
+
+        self.storyImagesProvider.getImage(withUrl: urlString, onComplete: { [weak self] (image, error) in
+            if let imageSetter = self?.imageSetters[index] {
+                imageSetter(image, error)
+            }
+        })
+    }
+
+    func cancelImageRequest(atIndex index: Int) {
+        imageSetters[index] = nil
     }
 }

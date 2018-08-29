@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Darwin
 
 class ApiService {
     enum StoriesApiServiceError: Int {
@@ -111,6 +112,19 @@ class ApiService {
 }
 
 extension ApiService: StoriesApiServiceProtocol {
+    // swiftlint:disable imageUrls, line_length
+    private static let imageUrls = ["http://informationcommunicationtechnology.com/wp-content/uploads/2018/06/Images-111.jpg",
+                                    "https://wallpaperbrowse.com/media/images/6986083-waterfall-images_Mc3SaMS.jpg",
+                                    "https://wallpaperbrowse.com/media/images/Dubai-Photos-Images-Oicture-Dubai-Landmarks-800x600.jpg",
+                                    "https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg",
+                                    "https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350",
+                                    "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350",
+                                    "https://wallpaperbrowse.com/media/images/soap-bubble-1958650_960_720.jpg",
+                                    "https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg",
+                                    "https://media.istockphoto.com/photos/plant-growing-picture-id510222832?k=6&m=510222832&s=612x612&w=0&h=Pzjkj2hf9IZiLAiXcgVE1FbCNFVmKzhdcT98dcHSdSk=",
+                                    "",
+                                    "https://images.pexels.com/photos/248797/pexels-photo-248798.jpeg"]
+
     func getTopStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
                            onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.topStories.name()
@@ -132,7 +146,22 @@ extension ApiService: StoriesApiServiceProtocol {
     func getStoryItems(ids: [Int],
                        onSuccess: @escaping ([StoryItem]) -> Void,
                        onFailure: @escaping (Error) -> Void) {
-        getFeedItems(byIds: ids, onSuccess: onSuccess, onFailure: onFailure)
+        let imageUrls = ApiService.imageUrls
+
+        getFeedItems(byIds: ids, onSuccess: { (feedItems: [StoryItem]) in
+            var resultItems: [StoryItem] = []
+
+            for index in 0..<feedItems.count {
+                var feedItem = feedItems[index]
+                let imageUrlIndex = Int(arc4random_uniform(UInt32(imageUrls.count)))
+
+                let imageUrl = imageUrls[imageUrlIndex]
+                feedItem.imageUrl = imageUrl == "" ? nil : imageUrl
+                resultItems.append(feedItem)
+            }
+
+            onSuccess(resultItems)
+        }, onFailure: onFailure)
     }
 }
 

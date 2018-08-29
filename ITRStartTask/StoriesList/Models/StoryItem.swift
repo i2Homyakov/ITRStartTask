@@ -23,6 +23,7 @@ struct StoryItem: StoryItemProtocol, Codable {
     let text: String?
     let parts: [Int]?
     let descendants: Int?
+    var imageUrl: String?
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case deleted
@@ -38,6 +39,7 @@ struct StoryItem: StoryItemProtocol, Codable {
         case text
         case parts
         case descendants
+        case imageUrl = "imageurl"
     }
 
     func getDateString() -> String {

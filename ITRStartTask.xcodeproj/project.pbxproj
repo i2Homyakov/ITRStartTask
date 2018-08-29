@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150EA0F82136D3BB00465EB8 /* StoryImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */; };
+		150EA0FA2136D3E400465EB8 /* StoryImagesProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */; };
 		1516D6352130304A00F3E706 /* StoryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516D6332130304A00F3E706 /* StoryHeaderCell.swift */; };
 		1516D6362130304A00F3E706 /* StoryHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1516D6342130304A00F3E706 /* StoryHeaderCell.xib */; };
 		1539B7F8212D9F3D009C67AC /* StoryItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1539B7F1212D9F3D009C67AC /* StoryItemProtocol.swift */; };
@@ -75,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryImagesProvider.swift; sourceTree = "<group>"; };
+		150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryImagesProviderProtocol.swift; sourceTree = "<group>"; };
 		1516D6332130304A00F3E706 /* StoryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHeaderCell.swift; sourceTree = "<group>"; };
 		1516D6342130304A00F3E706 /* StoryHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryHeaderCell.xib; sourceTree = "<group>"; };
 		1539B7F1212D9F3D009C67AC /* StoryItemProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryItemProtocol.swift; sourceTree = "<group>"; };
@@ -156,6 +160,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		150EA0FB2136D4E500465EB8 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */,
+				153A747A21255F21001E233D /* StoriesDataProvider.swift */,
+				150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */,
+				150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		1539B7EF212D9F3D009C67AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,10 +246,9 @@
 		153A746C21255BD3001E233D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */,
-				153A747A21255F21001E233D /* StoriesDataProvider.swift */,
-				1539B7F5212D9F3D009C67AC /* StoryItem.swift */,
+				150EA0FB2136D4E500465EB8 /* Providers */,
 				1539B7F1212D9F3D009C67AC /* StoryItemProtocol.swift */,
+				1539B7F5212D9F3D009C67AC /* StoryItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -540,10 +554,12 @@
 				1539B7F8212D9F3D009C67AC /* StoryItemProtocol.swift in Sources */,
 				1539B7FB212D9F3D009C67AC /* StoryItem.swift in Sources */,
 				1539B81E212DA4B0009C67AC /* CommentsDataProvider.swift in Sources */,
+				150EA0F82136D3BB00465EB8 /* StoryImagesProvider.swift in Sources */,
 				153A747E21256591001E233D /* StoriesDataProviderProtocol.swift in Sources */,
 				15BF6D31212AD6AE00944A90 /* StoriesPresenter.swift in Sources */,
 				15F5417E2135237C0019C3EA /* XibInitializable.swift in Sources */,
 				1539B813212D9F5E009C67AC /* CommentCell.swift in Sources */,
+				150EA0FA2136D3E400465EB8 /* StoryImagesProviderProtocol.swift in Sources */,
 				156B258021301693002F65B3 /* CommentItemModelProtocol.swift in Sources */,
 				156B257C212FEBED002F65B3 /* SyncOperation.swift in Sources */,
 				1580A42621230760009EA6D5 /* AppDelegate.swift in Sources */,

@@ -11,6 +11,17 @@ import Foundation
 protocol StoryItemProtocol: TimeProtocol {
     var title: String? { get }
     var kids: [Int]? { get }
+    var imageUrl: String? { get }
 
     func getDateString() -> String
+}
+
+extension StoryItemProtocol {
+    func getImageUrl() -> URL? {
+        if let imageUrl = self.imageUrl {
+            return URL(string: imageUrl)
+        }
+
+        return nil
+    }
 }

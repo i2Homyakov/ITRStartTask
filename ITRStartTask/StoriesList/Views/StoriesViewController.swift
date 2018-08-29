@@ -76,9 +76,19 @@ extension StoriesViewController: UITableViewDataSource {
             cell.dateString = storyItem.getDateString()
         }
 
+        cell.storyImage = UIImage(named: "EmptyStory")
+        cell.showImageProgress()
+
+        presenter.getImage(atIndex: indexPath.row, onComplete: { (image, _) in
+            if let image = image {
+                cell.storyImage = image
+            }
+
+            cell.hideImageProgress()
+        })
+
         return cell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
@@ -89,6 +99,11 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 
+    public func tableView(_ tableView: UITableView,
+                          didEndDisplaying cell: UITableViewCell,
+                          forRowAt indexPath: IndexPath) {
+        presenter.cancelImageRequest(atIndex: indexPath.row)
+    }
 }
 
 extension StoriesViewController {

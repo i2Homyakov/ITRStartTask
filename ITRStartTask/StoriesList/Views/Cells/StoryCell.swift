@@ -11,6 +11,8 @@ import UIKit
 class StoryCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleUILabel: UILabel!
+    @IBOutlet weak var storyImageView: UIImageView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     var title: String? {
         set {
@@ -28,6 +30,23 @@ class StoryCell: UITableViewCell {
         get {
             return dateLabel.text
         }
+    }
+
+    var storyImage: UIImage? {
+        set {
+            storyImageView.image = newValue
+        }
+        get {
+            return storyImageView.image
+        }
+    }
+
+    func hideImageProgress() {
+        self.activityIndicatorView.stopAnimating()
+    }
+
+    func showImageProgress() {
+        self.activityIndicatorView.startAnimating()
     }
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol StoriesPresenterProtocol {
     func show()
@@ -15,4 +15,8 @@ protocol StoriesPresenterProtocol {
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol?
 
+    func getImage(atIndex index: Int,
+                  onComplete: @escaping (UIImage?, Error?) -> Void)
+
+    func cancelImageRequest(atIndex index: Int)
 }
