@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol StoriesViewProtocol: class {
     func refreshStories()

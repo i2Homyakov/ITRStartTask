@@ -6,16 +6,16 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class FeedItemDeserializer: FeedItemDeserializerProtocol {
     func parse <T: Codable>(data: Data)throws -> T? {
         let decoder = JSONDecoder()
-        let item: T?  = try decoder.decode(T.self, from: data)
+        let item: T? = try decoder.decode(T.self, from: data)
         return item
     }
 
-    func parseIntArray(fromData: Data) throws -> [Int] {
-        return try JSONDecoder().decode(IntArray.self, from: fromData)
+    func parseArray <T: Codable>(fromData: Data) throws -> [T] {
+        return try JSONDecoder().decode([T].self, from: fromData)
     }
 }

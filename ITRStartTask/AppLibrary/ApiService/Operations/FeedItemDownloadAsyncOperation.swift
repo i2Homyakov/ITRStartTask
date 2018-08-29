@@ -13,6 +13,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
         case not200
         case incorrectData
         case operationCanceled
+        case unknownError
 
         func errorCode() -> Int {
             return self.rawValue
@@ -35,17 +36,22 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
                 return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
                                     code: FeedItemDownloadAsyncOperationError.operationCanceled.errorCode(),
                                     userInfo: ["localizedDescription": localizedDescription])
+            case .unknownError:
+                let localizedDescription = NSLocalizedString("UnknownError", comment: "")
+                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
+                                    code: FeedItemDownloadAsyncOperationError.unknownError.errorCode(),
+                                    userInfo: ["localizedDescription": localizedDescription])
             }
         }
     }
 
-    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer ()
+    private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     var url: URL
     var storyItem: T?
     var error: Error?
 
-    init (url: URL) {
+    init(url: URL) {
         self.url = url
         super.init()
     }
@@ -91,7 +97,13 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
                 return
             }
 
-            onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+            if data == nil {
+                onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+
+                return
+            }
+
+            onFailure(FeedItemDownloadAsyncOperationError.unknownError.error())
         }
 
         task.resume()
@@ -99,7 +111,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
 }
 
 extension FeedItemDownloadAsyncOperation {
-    static func operationsWith (urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
+    static func operationsWith(urls: [URL]) -> [FeedItemDownloadAsyncOperation] {
         return urls.map {FeedItemDownloadAsyncOperation(url: $0)}
     }
 }
