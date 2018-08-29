@@ -6,16 +6,16 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class StoriesDataProvider: StoriesDataProviderProtocol {
-    static let maxIdsNumber = 5
+    static let maxIdsNumber = 30
     private var apiServiceClient: StoriesApiServiceProtocol = ApiService()
 
     func getTopStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
                           onFailure: @escaping (Error) -> Void) {
 
-        apiServiceClient.getTopStoryIds (onSuccess: { [weak self] (ids) in
+        apiServiceClient.getTopStoryAllIds(onSuccess: { [weak self] (ids) in
             let maxIdsNumber = StoriesDataProvider.maxIdsNumber
             let ids = ids.count > maxIdsNumber ? Array(ids[0..<maxIdsNumber]) : ids
 

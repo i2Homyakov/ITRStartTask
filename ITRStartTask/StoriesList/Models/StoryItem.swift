@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct StoryItem: StoryItemProtocol, Codable {
     let identifier: Int
@@ -20,6 +20,7 @@ struct StoryItem: StoryItemProtocol, Codable {
     let url: String?
     let score: Int?
     let title: String?
+    let text: String?
     let parts: [Int]?
     let descendants: Int?
     enum CodingKeys: String, CodingKey {
@@ -34,7 +35,18 @@ struct StoryItem: StoryItemProtocol, Codable {
         case url
         case score
         case title
+        case text
         case parts
         case descendants
+    }
+
+    func getDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
+
+        let date = self.getDate()
+        let string = formatter.string(from: date)
+
+        return string
     }
 }

@@ -6,13 +6,15 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol StoryPresenterProtocol: class {
     func show()
 
-    func getCommentItemsCount () -> Int
+    func getCommentItemsCount() -> Int
 
-    func getCommentItem(atIndex: Int) -> CommentItemProtocol?
+    func getCommentItem(atIndex: Int) -> CommentItemModelProtocol?
+
+    func getStoryItem() -> StoryItemProtocol?
 
 }
