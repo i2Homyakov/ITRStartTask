@@ -16,7 +16,6 @@ class StoriesDataProvider: StoriesDataProviderProtocol {
         case best
     }
 
-
     private let category: StoryCategory
     private var apiServiceClient: StoriesApiServiceProtocol = ApiService()
 
