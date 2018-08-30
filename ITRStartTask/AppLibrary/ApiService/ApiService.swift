@@ -13,9 +13,29 @@ class ApiService {
         case not200
         case incorrectData
         case incorrectUrl
+        case unknownError
 
         func errorCode() -> Int {
             return self.rawValue
+        }
+
+        func errorLocalizedDescription() -> String {
+            switch self {
+            case .not200:
+                return NSLocalizedString("MessageFailToConnect", comment: "")
+            case .incorrectData:
+                return NSLocalizedString("IncorrectServerData", comment: "")
+            case .incorrectUrl:
+                return NSLocalizedString("UnknownError", comment: "")
+            case .unknownError:
+                return NSLocalizedString("UnknownError", comment: "")
+            }
+        }
+
+        func error() -> Error {
+            return NSError.init(domain: "ApiServiceError",
+                                code: self.errorCode(),
+                                userInfo: ["localizedDescription": self.errorLocalizedDescription()])
         }
     }
 
@@ -56,11 +76,12 @@ class ApiService {
                 }
             }
 
-            let errorString = NSLocalizedString("MessageFailToConnect", comment: "")
-            let error = NSError.init(domain: "ServiceClientError",
-                                     code: StoriesApiServiceError.not200.errorCode(),
-                                     userInfo: ["localizedDescription": errorString])
-            onFailure(error)
+            if data == nil {
+                onFailure(StoriesApiServiceError.not200.error())
+                return
+            }
+
+            onFailure(StoriesApiServiceError.unknownError.error())
         }
 
         task.resume()

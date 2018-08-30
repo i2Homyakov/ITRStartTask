@@ -27,7 +27,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
         self.view.showRootProgress()
 
-        storiesDataProvider.getTopStoryItems(onSuccess: { [weak self] (storyItems) in
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
             self?.storyItems = storyItems
             self?.view.refreshStories()
             self?.view.hideRootProgress()
@@ -43,7 +43,7 @@ class StoriesPresenter: StoriesPresenterProtocol {
     }
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol? {
-        if 0 <= atIndex && atIndex < self.storyItems.count {
+        if 0 <= atIndex && atIndex < storyItems.count {
             return storyItems[atIndex]
         }
 
