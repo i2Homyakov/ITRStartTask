@@ -153,7 +153,7 @@ extension ApiService: StoriesApiServiceProtocol {
 
             for index in 0..<feedItems.count {
                 var feedItem = feedItems[index]
-                let imageUrlIndex = Int(arc4random_uniform(UInt32(imageUrls.count)))
+                let imageUrlIndex = index % imageUrls.count
 
                 let imageUrl = imageUrls[imageUrlIndex]
                 feedItem.imageUrl = imageUrl == "" ? nil : imageUrl

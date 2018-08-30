@@ -40,10 +40,6 @@ class StoriesViewController: UIViewController, XibInitializable {
 
         self.navigationController?.isNavigationBarHidden = false
     }
-
-    static func xibInstance () -> StoriesViewController {
-        return StoriesViewController(nibName: self.nibName, bundle: nil)
-    }
 }
 
 extension StoriesViewController: StoriesViewProtocol {
@@ -58,6 +54,18 @@ extension StoriesViewController: StoriesViewProtocol {
     func hideRootProgress() {
         rootActivityIndicatorView.stopAnimating()
     }
+
+    func setStoryImage(atIndex index: Int, image: UIImage?) {
+        let indexPath = IndexPath(row: index, section: 0)
+
+        if let cell = self.tableView.cellForRow(at: indexPath) as? StoryCell {
+            if let image = image {
+                cell.storyImage = image
+            }
+
+            cell.hideImageProgress()
+        }
+    }
 }
 
 extension StoriesViewController: UITableViewDataSource {
@@ -71,21 +79,25 @@ extension StoriesViewController: UITableViewDataSource {
             return UITableViewCell(frame: .zero)
         }
 
-        if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
+        cell.reset()
+
+        if let storyItem = presenter?.getStoryItem(atIndex: indexPath.row) {
             cell.title = storyItem.title
             cell.dateString = storyItem.getDateString()
-        }
 
-        cell.storyImage = UIImage(named: "EmptyStory")
-        cell.showImageProgress()
-
-        presenter.getImage(atIndex: indexPath.row, onComplete: { (image, _) in
-            if let image = image {
-                cell.storyImage = image
+            if storyItem.imageUrl == nil {
+                cell.hideImage()
+                return cell
             }
 
-            cell.hideImageProgress()
-        })
+            if let image = presenter.getImage(atIndex: indexPath.row) {
+                cell.storyImage = image
+                return cell
+            }
+
+            cell.storyImage = UIImage(named: "EmptyStory")
+            cell.showImageProgress()
+        }
 
         return cell
     }
@@ -104,8 +116,4 @@ extension StoriesViewController: UITableViewDelegate {
                           forRowAt indexPath: IndexPath) {
         presenter.cancelImageRequest(atIndex: indexPath.row)
     }
-}
-
-extension StoriesViewController {
-    static let nibName = "StoriesViewController"
 }

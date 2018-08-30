@@ -15,8 +15,7 @@ protocol StoriesPresenterProtocol {
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol?
 
-    func getImage(atIndex index: Int,
-                  onComplete: @escaping (UIImage?, Error?) -> Void)
+    func getImage(atIndex index: Int) -> UIImage?
 
     func cancelImageRequest(atIndex index: Int)
 }

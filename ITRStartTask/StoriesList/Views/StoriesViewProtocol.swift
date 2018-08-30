@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol StoriesViewProtocol: class {
     func refreshStories()
@@ -14,4 +14,6 @@ protocol StoriesViewProtocol: class {
     func showRootProgress()
 
     func hideRootProgress()
+
+    func setStoryImage(atIndex index: Int, image: UIImage?)
 }

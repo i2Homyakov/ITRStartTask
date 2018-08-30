@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		150EA0F82136D3BB00465EB8 /* StoryImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */; };
-		150EA0FA2136D3E400465EB8 /* StoryImagesProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */; };
 		1516D6352130304A00F3E706 /* StoryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1516D6332130304A00F3E706 /* StoryHeaderCell.swift */; };
 		1516D6362130304A00F3E706 /* StoryHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1516D6342130304A00F3E706 /* StoryHeaderCell.xib */; };
 		1539B7F8212D9F3D009C67AC /* StoryItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1539B7F1212D9F3D009C67AC /* StoryItemProtocol.swift */; };
@@ -27,6 +25,10 @@
 		153A747821255BD3001E233D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 153A746F21255BD3001E233D /* Localizable.strings */; };
 		153A747B21255F21001E233D /* StoriesDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A747A21255F21001E233D /* StoriesDataProvider.swift */; };
 		153A747E21256591001E233D /* StoriesDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */; };
+		153CABBC2137BDA6001AE386 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */; };
+		153CABBE2137C173001AE386 /* ImagesDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */; };
+		153CABC12137C33F001AE386 /* ImagesDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */; };
+		153CABC32137CF9B001AE386 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */; };
 		15496D19212BF7AA008231F1 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15496D17212BF7AA008231F1 /* StoriesViewController.swift */; };
 		15496D1A212BF7AA008231F1 /* StoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15496D18212BF7AA008231F1 /* StoriesViewController.xib */; };
 		156B256C212FD568002F65B3 /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B255C212FD568002F65B3 /* ViewControllersFactory.swift */; };
@@ -77,8 +79,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryImagesProvider.swift; sourceTree = "<group>"; };
-		150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryImagesProviderProtocol.swift; sourceTree = "<group>"; };
 		1516D6332130304A00F3E706 /* StoryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryHeaderCell.swift; sourceTree = "<group>"; };
 		1516D6342130304A00F3E706 /* StoryHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryHeaderCell.xib; sourceTree = "<group>"; };
 		1539B7F1212D9F3D009C67AC /* StoryItemProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryItemProtocol.swift; sourceTree = "<group>"; };
@@ -97,6 +97,10 @@
 		153A746F21255BD3001E233D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		153A747A21255F21001E233D /* StoriesDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataProvider.swift; sourceTree = "<group>"; };
 		153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataProviderProtocol.swift; sourceTree = "<group>"; };
+		153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloader.swift; sourceTree = "<group>"; };
+		153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloaderProtocol.swift; sourceTree = "<group>"; };
+		153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloaderDelegate.swift; sourceTree = "<group>"; };
+		153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		15496D17212BF7AA008231F1 /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		15496D18212BF7AA008231F1 /* StoriesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoriesViewController.xib; sourceTree = "<group>"; };
 		156B255C212FD568002F65B3 /* ViewControllersFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
@@ -165,8 +169,6 @@
 			children = (
 				153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */,
 				153A747A21255F21001E233D /* StoriesDataProvider.swift */,
-				150EA0F92136D3E400465EB8 /* StoryImagesProviderProtocol.swift */,
-				150EA0F72136D3BB00465EB8 /* StoryImagesProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -263,6 +265,17 @@
 			path = StoryDetail;
 			sourceTree = "<group>";
 		};
+		153CABBF2137C32C001AE386 /* ImageDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */,
+				153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */,
+				153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */,
+				153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */,
+			);
+			path = ImageDownloader;
+			sourceTree = "<group>";
+		};
 		156B255B212FD568002F65B3 /* AppLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +292,7 @@
 		156B255F212FD568002F65B3 /* ApiService */ = {
 			isa = PBXGroup;
 			children = (
+				153CABBF2137C32C001AE386 /* ImageDownloader */,
 				156B2564212FD568002F65B3 /* Operations */,
 				156B2560212FD568002F65B3 /* FeedItemDeserializerProtocol.swift */,
 				156B2561212FD568002F65B3 /* ApiService.swift */,
@@ -554,18 +568,18 @@
 				1539B7F8212D9F3D009C67AC /* StoryItemProtocol.swift in Sources */,
 				1539B7FB212D9F3D009C67AC /* StoryItem.swift in Sources */,
 				1539B81E212DA4B0009C67AC /* CommentsDataProvider.swift in Sources */,
-				150EA0F82136D3BB00465EB8 /* StoryImagesProvider.swift in Sources */,
 				153A747E21256591001E233D /* StoriesDataProviderProtocol.swift in Sources */,
 				15BF6D31212AD6AE00944A90 /* StoriesPresenter.swift in Sources */,
+				153CABC32137CF9B001AE386 /* ImageDownloadOperation.swift in Sources */,
 				15F5417E2135237C0019C3EA /* XibInitializable.swift in Sources */,
 				1539B813212D9F5E009C67AC /* CommentCell.swift in Sources */,
-				150EA0FA2136D3E400465EB8 /* StoryImagesProviderProtocol.swift in Sources */,
 				156B258021301693002F65B3 /* CommentItemModelProtocol.swift in Sources */,
 				156B257C212FEBED002F65B3 /* SyncOperation.swift in Sources */,
 				1580A42621230760009EA6D5 /* AppDelegate.swift in Sources */,
 				156B257E21301653002F65B3 /* CommentItemModel.swift in Sources */,
 				156B256E212FD568002F65B3 /* Style.swift in Sources */,
 				156B2578212FD568002F65B3 /* FeedItemDeserializer.swift in Sources */,
+				153CABBC2137BDA6001AE386 /* ImagesDownloader.swift in Sources */,
 				1539B818212D9FCC009C67AC /* CommentItemProtocol.swift in Sources */,
 				15BF6D3C212AF20700944A90 /* StoryPresenterProtocol.swift in Sources */,
 				1539B816212D9F5E009C67AC /* StoryViewProtocol.swift in Sources */,
@@ -580,9 +594,11 @@
 				15BF6D41212B08E600944A90 /* StoryCell.swift in Sources */,
 				15BF6D2F212AD64F00944A90 /* StoriesPresenterProtocol.swift in Sources */,
 				156B2576212FD568002F65B3 /* FeedItemsDownloadOperation.swift in Sources */,
+				153CABBE2137C173001AE386 /* ImagesDownloaderProtocol.swift in Sources */,
 				153A747B21255F21001E233D /* StoriesDataProvider.swift in Sources */,
 				156B256C212FD568002F65B3 /* ViewControllersFactory.swift in Sources */,
 				156B2570212FD568002F65B3 /* ApiService.swift in Sources */,
+				153CABC12137C33F001AE386 /* ImagesDownloaderDelegate.swift in Sources */,
 				15BF6D3A212AF1F400944A90 /* StoryPresenter.swift in Sources */,
 				1539B814212D9F5E009C67AC /* StoryViewController.swift in Sources */,
 				156B256D212FD568002F65B3 /* TimeProtocol.swift in Sources */,

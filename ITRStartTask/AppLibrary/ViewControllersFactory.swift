@@ -11,11 +11,11 @@ import UIKit
 class ViewControllersFactory {
     static func getStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
-        let storyImagesProvider: StoryImagesProviderProtocol = StoryImagesProvider()
+        let storyImagesDownloader: ImagesDownloaderProtocol = ImagesDownloader()
 
         let presenter = StoriesPresenter(view: view,
                                          storiesDataProvider: StoriesDataProvider(),
-                                         storyImagesProvider: storyImagesProvider)
+                                         storyImagesDownloader: storyImagesDownloader)
         view.presenter = presenter
 
         return view

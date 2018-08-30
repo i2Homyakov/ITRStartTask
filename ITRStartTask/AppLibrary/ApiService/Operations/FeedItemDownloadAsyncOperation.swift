@@ -19,29 +19,23 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
             return self.rawValue
         }
 
-        func error() -> Error {
+        func errorMessage() -> String {
             switch self {
             case .not200:
-                let errorString = NSLocalizedString("MessageFailToConnect", comment: "")
-                return NSError.init(domain: "ServiceClientError",
-                                    code: FeedItemDownloadAsyncOperationError.not200.errorCode(),
-                                    userInfo: ["localizedDescription": errorString])
+                return NSLocalizedString("MessageFailToConnect", comment: "")
             case .incorrectData:
-                let localizedDescription = NSLocalizedString("IncorrectServerData", comment: "")
-                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                    code: FeedItemDownloadAsyncOperationError.incorrectData.errorCode(),
-                                    userInfo: ["localizedDescription": localizedDescription])
+                return NSLocalizedString("IncorrectServerData", comment: "")
             case .operationCanceled:
-                let localizedDescription = NSLocalizedString("OperationCanceled", comment: "")
-                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                    code: FeedItemDownloadAsyncOperationError.operationCanceled.errorCode(),
-                                    userInfo: ["localizedDescription": localizedDescription])
+                return NSLocalizedString("OperationCanceled", comment: "")
             case .unknownError:
-                let localizedDescription = NSLocalizedString("UnknownError", comment: "")
-                return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                    code: FeedItemDownloadAsyncOperationError.unknownError.errorCode(),
-                                    userInfo: ["localizedDescription": localizedDescription])
+                return NSLocalizedString("UnknownError", comment: "")
             }
+        }
+
+        func error() -> Error {
+            return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
+                                code: self.errorCode(),
+                                userInfo: ["localizedDescription": self.errorMessage()])
         }
     }
 

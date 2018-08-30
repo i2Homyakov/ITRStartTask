@@ -13,6 +13,7 @@ class StoryCell: UITableViewCell {
     @IBOutlet weak var titleUILabel: UILabel!
     @IBOutlet weak var storyImageView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var imageContainer: UIView!
 
     var title: String? {
         set {
@@ -47,6 +48,15 @@ class StoryCell: UITableViewCell {
 
     func showImageProgress() {
         self.activityIndicatorView.startAnimating()
+    }
+
+    func hideImage() {
+        imageContainer.isHidden = true
+    }
+
+    func reset() {
+        hideImageProgress()
+        imageContainer.isHidden = false
     }
 }
 

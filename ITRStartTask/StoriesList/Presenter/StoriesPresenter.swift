@@ -13,20 +13,21 @@ class StoriesPresenter: StoriesPresenterProtocol {
     unowned let view: StoriesViewProtocol
 
     private var storiesDataProvider: StoriesDataProviderProtocol
-    private var storyImagesProvider: StoryImagesProviderProtocol
+    private var storyImagesDownloader: ImagesDownloaderProtocol
 
-    var imageSetters: [Int: (UIImage?, Error?) -> Void]
+    var storyImages: [Int: UIImage]
 
     init(view: StoriesViewProtocol,
          storiesDataProvider: StoriesDataProviderProtocol,
-         storyImagesProvider: StoryImagesProviderProtocol) {
+         storyImagesDownloader: ImagesDownloaderProtocol) {
         self.storyItems = []
         self.view = view
 
         self.storiesDataProvider = storiesDataProvider
-        self.storyImagesProvider = storyImagesProvider
+        self.storyImagesDownloader = storyImagesDownloader
 
-        imageSetters = [:]
+        self.storyImages = [:]
+        self.storyImagesDownloader.delegate = self
     }
 
     func show() {
@@ -60,23 +61,29 @@ class StoriesPresenter: StoriesPresenterProtocol {
         return nil
     }
 
-    func getImage(atIndex index: Int,
-                  onComplete: @escaping (UIImage?, Error?) -> Void) {
-        if imageSetters[index] != nil {
-            return
+    func getImage(atIndex index: Int) -> UIImage? {
+        guard let image = self.storyImages[index] else {
+            if let imageUrl = self.getStoryItem(atIndex: index)?.imageUrl {
+                self.storyImagesDownloader.getImage(withUrl: imageUrl, atIndex: index)
+            }
+
+            return nil
         }
 
-        imageSetters[index] = onComplete
-        let urlString = getStoryItem(atIndex: index)?.imageUrl
-
-        self.storyImagesProvider.getImage(withUrl: urlString, onComplete: { [weak self] (image, error) in
-            if let imageSetter = self?.imageSetters[index] {
-                imageSetter(image, error)
-            }
-        })
+        return image
     }
 
     func cancelImageRequest(atIndex index: Int) {
-        imageSetters[index] = nil
+        self.storyImagesDownloader.cancel(withIndex: index)
+    }
+}
+
+extension StoriesPresenter: ImagesDownloaderDelegate {
+    func onComplete(downloader: ImagesDownloaderProtocol, image: UIImage?, imageIndex: Int, error: Error?) {
+        if let image = image {
+            self.storyImages[imageIndex] = image
+        }
+
+        view.setStoryImage(atIndex: imageIndex, image: image)
     }
 }
