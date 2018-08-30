@@ -12,7 +12,6 @@ class ViewControllersFactory {
     static func getStoryViewController(storyItem: StoryItemProtocol) -> UIViewController {
         let view: StoryViewController = StoryViewController.xibInstance()
         let dataProvider: CommentsDataProviderProtocol = CommentsDataProvider()
-
         let presenter = StoryPresenter(view: view, model: storyItem, commentsDataProvider: dataProvider)
         view.presenter = presenter
 
@@ -47,7 +46,6 @@ class ViewControllersFactory {
     private static func getTopStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .top)
-
         let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
         view.presenter = presenter
 
@@ -57,7 +55,6 @@ class ViewControllersFactory {
     private static func getNewStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .new)
-
         let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
         view.presenter = presenter
 
@@ -67,7 +64,6 @@ class ViewControllersFactory {
     private static func getBestStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .best)
-
         let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
         view.presenter = presenter
 
