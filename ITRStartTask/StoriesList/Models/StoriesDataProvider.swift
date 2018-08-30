@@ -9,13 +9,13 @@
 import Foundation
 
 class StoriesDataProvider: StoriesDataProviderProtocol {
+    static let maxIdsNumber = 30
     enum StoryCategory {
         case top
         case new
         case best
     }
 
-    static let maxIdsNumber = 5
 
     private let category: StoryCategory
     private var apiServiceClient: StoriesApiServiceProtocol = ApiService()

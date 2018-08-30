@@ -9,7 +9,7 @@
 import Foundation
 
 class StoryPresenter: StoryPresenterProtocol {
-    static let maxIdsNumber = 5
+    static let maxIdsNumber = 30
 
     var view: StoryViewProtocol
     var storyItem: StoryItemProtocol
