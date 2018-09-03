@@ -9,6 +9,6 @@
 import Foundation
 
 protocol StoriesDataProviderProtocol {
-    func getTopStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
-                          onFailure: @escaping (Error) -> Void)
+    func getStoryItems(onSuccess: @escaping ([StoryItem]) -> Void,
+                       onFailure: @escaping (Error) -> Void)
 }

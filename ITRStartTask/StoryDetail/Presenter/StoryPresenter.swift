@@ -24,9 +24,8 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     func show() {
-        self.view.showRootProgress()
-
         if let ids = storyItem.kids {
+            self.view.showRootProgress()
             let maxIdsNumber = StoriesDataProvider.maxIdsNumber
             let ids = ids.count > maxIdsNumber ? Array(ids[0..<maxIdsNumber]) : ids
 
