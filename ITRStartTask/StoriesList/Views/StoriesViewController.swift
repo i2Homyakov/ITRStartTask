@@ -10,6 +10,7 @@ import UIKit
 
 class StoriesViewController: UIViewController, XibInitializable {
     fileprivate static let storyCellId = "storyCell"
+    private weak var animationView: AnimationLaunchScreenView?
 
     var presenter: StoriesPresenterProtocol!
 
@@ -27,12 +28,14 @@ class StoriesViewController: UIViewController, XibInitializable {
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
         self.tableView.tableFooterView = UIView()
+        self.addAnimationView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         presenter.show()
+        animationView?.animate()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +46,29 @@ class StoriesViewController: UIViewController, XibInitializable {
 
     static func xibInstance () -> StoriesViewController {
         return StoriesViewController(nibName: self.nibName, bundle: nil)
+    }
+
+    private func addAnimationView() {
+        let animationView = AnimationLaunchScreenView(frame: UIScreen.main.bounds)
+
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(animationView)
+            animationView.translatesAutoresizingMaskIntoConstraints = false
+            self.animationView = animationView
+            let views = ["animationView": animationView]
+
+            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[animationView]|",
+                                                             options: [],
+                                                             metrics: nil,
+                                                             views: views)
+
+            constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[animationView]|",
+                                                          options: [],
+                                                          metrics: nil,
+                                                          views: views)
+
+            window.addConstraints(constraints)
+        }
     }
 }
 
@@ -78,7 +104,6 @@ extension StoriesViewController: UITableViewDataSource {
 
         return cell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
@@ -88,7 +113,6 @@ extension StoriesViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
-
 }
 
 extension StoriesViewController {

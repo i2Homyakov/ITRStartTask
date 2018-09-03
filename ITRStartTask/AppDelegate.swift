@@ -14,18 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        self.window = window
-
-        let animationLaunchScreen = ViewControllersFactory.getAnimationLaunchScreen()
-
         let rootViewController = ViewControllersFactory.getStoriesViewController()
         let navigationVontroller = UINavigationController(rootViewController: rootViewController)
 
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
         window.rootViewController = navigationVontroller
         window.makeKeyAndVisible()
-        rootViewController.present(animationLaunchScreen, animated: false, completion: nil)
 
         return true
     }
