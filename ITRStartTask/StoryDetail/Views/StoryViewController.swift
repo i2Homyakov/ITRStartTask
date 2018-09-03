@@ -38,6 +38,7 @@ class StoryViewController: UIViewController, XibInitializable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.show()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     }
 
     private func replaceBackButton() {
@@ -46,7 +47,6 @@ class StoryViewController: UIViewController, XibInitializable {
                                      target: self,
                                      action: #selector(backPressed))
         button.tintColor = UIColor.black
-
         self.navigationItem.leftBarButtonItem = button
     }
 }
