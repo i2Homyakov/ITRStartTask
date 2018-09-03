@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
-        let rootViewController = ViewControllersFactory.getStoriesViewController()
+        let rootViewController = ViewControllersFactory.getStoryCategoriesTabBarController()
         let navigationVontroller = UINavigationController(rootViewController: rootViewController)
 
         window.rootViewController = navigationVontroller

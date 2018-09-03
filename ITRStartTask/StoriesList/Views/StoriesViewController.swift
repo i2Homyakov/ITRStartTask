@@ -19,8 +19,6 @@ class StoriesViewController: UIViewController, XibInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Stories", comment: "")
-
         self.tableView.delegate = self
         self.tableView.dataSource = self
 

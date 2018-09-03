@@ -40,10 +40,6 @@ class StoryViewController: UIViewController, XibInitializable {
         presenter.show()
     }
 
-    static func xibInstance () -> StoryViewController {
-        return StoryViewController(nibName: self.nibName, bundle: nil)
-    }
-
     private func replaceBackButton() {
         let button = UIBarButtonItem(image: UIImage(named: "BackButton"),
                                      style: UIBarButtonItemStyle.plain,
@@ -109,8 +105,4 @@ extension StoryViewController: UITableViewDataSource {
 
         return cell
     }
-}
-
-extension StoryViewController {
-    static let nibName = "StoryViewController"
 }

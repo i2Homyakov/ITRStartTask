@@ -9,6 +9,7 @@
 import Foundation
 
 class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
+
     private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     var url: URL

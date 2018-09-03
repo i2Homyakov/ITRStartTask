@@ -46,7 +46,12 @@ class ApiService {
                 }
             }
 
-            onFailure(ApiServiceError.not200.error())
+            if data == nil {
+                onFailure(ApiServiceError.not200.error())
+                return
+            }
+
+            onFailure(ApiServiceError.unknownError.error())
         }
 
         task.resume()
