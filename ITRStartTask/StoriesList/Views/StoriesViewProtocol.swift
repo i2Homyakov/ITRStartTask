@@ -14,6 +14,4 @@ protocol StoriesViewProtocol: class {
     func showRootProgress()
 
     func hideRootProgress()
-
-    func setStoryImage(atIndex index: Int, image: UIImage?)
 }

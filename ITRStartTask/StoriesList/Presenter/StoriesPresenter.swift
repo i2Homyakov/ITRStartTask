@@ -15,19 +15,17 @@ class StoriesPresenter: StoriesPresenterProtocol {
     private var storiesDataProvider: StoriesDataProviderProtocol
     private var storyImagesDownloader: ImagesDownloaderProtocol
 
-    var storyImages: [Int: UIImage]
+    var storyImages: [String: UIImage]
 
     init(view: StoriesViewProtocol,
          storiesDataProvider: StoriesDataProviderProtocol,
          storyImagesDownloader: ImagesDownloaderProtocol) {
         self.storyItems = []
+        self.storyImages = [:]
         self.view = view
 
         self.storiesDataProvider = storiesDataProvider
         self.storyImagesDownloader = storyImagesDownloader
-
-        self.storyImages = [:]
-        self.storyImagesDownloader.delegate = self
     }
 
     func show() {
@@ -61,29 +59,34 @@ class StoriesPresenter: StoriesPresenterProtocol {
         return nil
     }
 
-    func getImage(atIndex index: Int) -> UIImage? {
-        guard let image = self.storyImages[index] else {
-            if let imageUrl = self.getStoryItem(atIndex: index)?.imageUrl {
-                self.storyImagesDownloader.getImage(withUrl: imageUrl, atIndex: index)
-            }
-
-            return nil
-        }
-
-        return image
+    func getImage(forStoryItem storyItem: StoryItemProtocol) -> UIImage? {
+        let imageHash = self.getImageHash(forStoryItem: storyItem)
+        return self.storyImages[imageHash]
     }
 
-    func cancelImageRequest(atIndex index: Int) {
-        self.storyImagesDownloader.cancel(withIndex: index)
+    func donwloadImage(forStoryItem storyItem: StoryItemProtocol,
+                       onSuccess: @escaping (UIImage) -> Void,
+                       onFailure: @escaping (Error) -> Void) {
+        if let imageUrl = storyItem.imageUrl {
+            self.storyImagesDownloader.getImage(withUrl: imageUrl, onSuccess: { (image) in
+                let imageHash = self.getImageHash(forStoryItem: storyItem)
+                self.storyImages[imageHash] = image
+                onSuccess(image)
+            }, onFailure: onFailure)
+        }
     }
-}
 
-extension StoriesPresenter: ImagesDownloaderDelegate {
-    func onComplete(downloader: ImagesDownloaderProtocol, image: UIImage?, imageIndex: Int, error: Error?) {
-        if let image = image {
-            self.storyImages[imageIndex] = image
+    func cancelImageDownload(forStoryItem storyItem: StoryItemProtocol) {
+        if let imageUrl = storyItem.imageUrl {
+            self.storyImagesDownloader.cancel(withUrl: imageUrl)
+        }
+    }
+
+    private func getImageHash(forStoryItem item: StoryItemProtocol) -> String {
+        if let hashValue = item.imageUrl?.hashValue {
+            return String(hashValue)
         }
 
-        view.setStoryImage(atIndex: imageIndex, image: image)
+        return ""
     }
 }

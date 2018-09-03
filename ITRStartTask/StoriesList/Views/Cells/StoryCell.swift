@@ -15,6 +15,8 @@ class StoryCell: UITableViewCell {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var imageContainer: UIView!
 
+    var cancelImageDownload: (() -> Void)?
+
     var title: String? {
         set {
             titleUILabel.text = newValue
@@ -57,6 +59,11 @@ class StoryCell: UITableViewCell {
     func reset() {
         hideImageProgress()
         imageContainer.isHidden = false
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.cancelImageDownload?()
     }
 }
 

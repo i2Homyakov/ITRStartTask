@@ -9,36 +9,6 @@
 import Foundation
 
 class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
-    enum FeedItemDownloadAsyncOperationError: Int {
-        case not200
-        case incorrectData
-        case operationCanceled
-        case unknownError
-
-        func errorCode() -> Int {
-            return self.rawValue
-        }
-
-        func errorMessage() -> String {
-            switch self {
-            case .not200:
-                return NSLocalizedString("MessageFailToConnect", comment: "")
-            case .incorrectData:
-                return NSLocalizedString("IncorrectServerData", comment: "")
-            case .operationCanceled:
-                return NSLocalizedString("OperationCanceled", comment: "")
-            case .unknownError:
-                return NSLocalizedString("UnknownError", comment: "")
-            }
-        }
-
-        func error() -> Error {
-            return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                code: self.errorCode(),
-                                userInfo: ["localizedDescription": self.errorMessage()])
-        }
-    }
-
     private let deserializer: FeedItemDeserializerProtocol = FeedItemDeserializer()
 
     var url: URL
@@ -82,7 +52,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
                         return
                     }
 
-                    onFailure(FeedItemDownloadAsyncOperationError.incorrectData.error())
+                    onFailure(ApiServiceError.incorrectData.error())
                 } catch let error as NSError {
                     onFailure(error)
                     return
@@ -92,12 +62,12 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
             }
 
             if data == nil {
-                onFailure(FeedItemDownloadAsyncOperationError.not200.error())
+                onFailure(ApiServiceError.not200.error())
 
                 return
             }
 
-            onFailure(FeedItemDownloadAsyncOperationError.unknownError.error())
+            onFailure(ApiServiceError.unknownError.error())
         }
 
         task.resume()

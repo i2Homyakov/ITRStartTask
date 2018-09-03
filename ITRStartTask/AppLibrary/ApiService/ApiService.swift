@@ -7,19 +7,8 @@
 //
 
 import Foundation
-import Darwin
 
 class ApiService {
-    enum StoriesApiServiceError: Int {
-        case not200
-        case incorrectData
-        case incorrectUrl
-
-        func errorCode() -> Int {
-            return self.rawValue
-        }
-    }
-
     enum StoriesCategory: String {
         case topStories = "topstories"
         case newStories = "newstories"
@@ -57,11 +46,7 @@ class ApiService {
                 }
             }
 
-            let errorString = NSLocalizedString("MessageFailToConnect", comment: "")
-            let error = NSError.init(domain: "ServiceClientError",
-                                     code: StoriesApiServiceError.not200.errorCode(),
-                                     userInfo: ["localizedDescription": errorString])
-            onFailure(error)
+            onFailure(ApiServiceError.not200.error())
         }
 
         task.resume()

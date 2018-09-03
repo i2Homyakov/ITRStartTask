@@ -9,39 +9,6 @@
 import UIKit
 
 class ImageDownloadOperation: AsyncOperation {
-    enum ImageDownloadOperationError: Int {
-        case not200
-        case incorrectData
-        case incorrectUrl
-        case operationCanceled
-        case unknownError
-
-        func errorCode() -> Int {
-            return self.rawValue
-        }
-
-        func errorMessage() -> String {
-            switch self {
-            case .not200:
-                return NSLocalizedString("MessageFailToConnect", comment: "")
-            case .incorrectData:
-                return NSLocalizedString("IncorrectServerData", comment: "")
-            case .incorrectUrl:
-                return NSLocalizedString("UnknownError", comment: "")
-            case .operationCanceled:
-                return NSLocalizedString("OperationCanceled", comment: "")
-            case .unknownError:
-                return NSLocalizedString("UnknownError", comment: "")
-            }
-        }
-
-        func error() -> Error {
-            return NSError.init(domain: "ImageDownloadOperationError",
-                                code: self.errorCode(),
-                                userInfo: ["localizedDescription": self.errorMessage()])
-        }
-    }
-
     var urlString: String
     var image: UIImage?
     var error: Error?
@@ -67,7 +34,7 @@ class ImageDownloadOperation: AsyncOperation {
         }
 
         guard let url = URL(string: urlString) else {
-            self.error = ImageDownloadOperationError.incorrectUrl.error()
+            self.error = ApiServiceError.incorrectUrl.error()
             return
         }
 
@@ -87,7 +54,7 @@ class ImageDownloadOperation: AsyncOperation {
                 return
             }
 
-            self.error = ImageDownloadOperationError.incorrectData.error()
+            self.error = ApiServiceError.incorrectData.error()
             return
         } catch {
             self.error = error
@@ -96,7 +63,7 @@ class ImageDownloadOperation: AsyncOperation {
     }
 
     override func cancel() {
-        self.error = ImageDownloadOperationError.operationCanceled.error()
+        self.error = ApiServiceError.operationCanceled.error()
         super.cancel()
     }
 }

@@ -6,12 +6,12 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ImagesDownloaderProtocol {
-    var delegate: ImagesDownloaderDelegate? { get set }
+    func getImage(withUrl url: String,
+                  onSuccess: @escaping (UIImage) -> Void,
+                  onFailure: @escaping (Error) -> Void)
 
-    func getImage(withUrl url: String, atIndex index: Int)
-
-    func cancel(withIndex index: Int)
+    func cancel(withUrl urlString: String)
 }

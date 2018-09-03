@@ -27,10 +27,10 @@
 		153A747E21256591001E233D /* StoriesDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */; };
 		153CABBC2137BDA6001AE386 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */; };
 		153CABBE2137C173001AE386 /* ImagesDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */; };
-		153CABC12137C33F001AE386 /* ImagesDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */; };
 		153CABC32137CF9B001AE386 /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */; };
 		15496D19212BF7AA008231F1 /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15496D17212BF7AA008231F1 /* StoriesViewController.swift */; };
 		15496D1A212BF7AA008231F1 /* StoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15496D18212BF7AA008231F1 /* StoriesViewController.xib */; };
+		1553762C213D1A1300271500 /* ApiServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1553762B213D1A1300271500 /* ApiServiceError.swift */; };
 		156B256C212FD568002F65B3 /* ViewControllersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B255C212FD568002F65B3 /* ViewControllersFactory.swift */; };
 		156B256D212FD568002F65B3 /* TimeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B255D212FD568002F65B3 /* TimeProtocol.swift */; };
 		156B256E212FD568002F65B3 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156B255E212FD568002F65B3 /* Style.swift */; };
@@ -99,10 +99,10 @@
 		153A747D21256591001E233D /* StoriesDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDataProviderProtocol.swift; sourceTree = "<group>"; };
 		153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloader.swift; sourceTree = "<group>"; };
 		153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloaderProtocol.swift; sourceTree = "<group>"; };
-		153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDownloaderDelegate.swift; sourceTree = "<group>"; };
 		153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 		15496D17212BF7AA008231F1 /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		15496D18212BF7AA008231F1 /* StoriesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoriesViewController.xib; sourceTree = "<group>"; };
+		1553762B213D1A1300271500 /* ApiServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceError.swift; sourceTree = "<group>"; };
 		156B255C212FD568002F65B3 /* ViewControllersFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllersFactory.swift; sourceTree = "<group>"; };
 		156B255D212FD568002F65B3 /* TimeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeProtocol.swift; sourceTree = "<group>"; };
 		156B255E212FD568002F65B3 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -268,7 +268,6 @@
 		153CABBF2137C32C001AE386 /* ImageDownloader */ = {
 			isa = PBXGroup;
 			children = (
-				153CABC02137C33F001AE386 /* ImagesDownloaderDelegate.swift */,
 				153CABBD2137C173001AE386 /* ImagesDownloaderProtocol.swift */,
 				153CABBB2137BDA6001AE386 /* ImagesDownloader.swift */,
 				153CABC22137CF9B001AE386 /* ImageDownloadOperation.swift */,
@@ -299,6 +298,7 @@
 				156B2562212FD568002F65B3 /* CommentsApiServiceProtocol.swift */,
 				156B2563212FD568002F65B3 /* StoriesApiServiceProtocol.swift */,
 				156B256B212FD568002F65B3 /* FeedItemDeserializer.swift */,
+				1553762B213D1A1300271500 /* ApiServiceError.swift */,
 			);
 			path = ApiService;
 			sourceTree = "<group>";
@@ -592,13 +592,13 @@
 				156B2572212FD568002F65B3 /* StoriesApiServiceProtocol.swift in Sources */,
 				156B2571212FD568002F65B3 /* CommentsApiServiceProtocol.swift in Sources */,
 				15BF6D41212B08E600944A90 /* StoryCell.swift in Sources */,
+				1553762C213D1A1300271500 /* ApiServiceError.swift in Sources */,
 				15BF6D2F212AD64F00944A90 /* StoriesPresenterProtocol.swift in Sources */,
 				156B2576212FD568002F65B3 /* FeedItemsDownloadOperation.swift in Sources */,
 				153CABBE2137C173001AE386 /* ImagesDownloaderProtocol.swift in Sources */,
 				153A747B21255F21001E233D /* StoriesDataProvider.swift in Sources */,
 				156B256C212FD568002F65B3 /* ViewControllersFactory.swift in Sources */,
 				156B2570212FD568002F65B3 /* ApiService.swift in Sources */,
-				153CABC12137C33F001AE386 /* ImagesDownloaderDelegate.swift in Sources */,
 				15BF6D3A212AF1F400944A90 /* StoryPresenter.swift in Sources */,
 				1539B814212D9F5E009C67AC /* StoryViewController.swift in Sources */,
 				156B256D212FD568002F65B3 /* TimeProtocol.swift in Sources */,

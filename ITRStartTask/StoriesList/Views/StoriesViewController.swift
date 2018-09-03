@@ -54,18 +54,6 @@ extension StoriesViewController: StoriesViewProtocol {
     func hideRootProgress() {
         rootActivityIndicatorView.stopAnimating()
     }
-
-    func setStoryImage(atIndex index: Int, image: UIImage?) {
-        let indexPath = IndexPath(row: index, section: 0)
-
-        if let cell = self.tableView.cellForRow(at: indexPath) as? StoryCell {
-            if let image = image {
-                cell.storyImage = image
-            }
-
-            cell.hideImageProgress()
-        }
-    }
 }
 
 extension StoriesViewController: UITableViewDataSource {
@@ -90,13 +78,23 @@ extension StoriesViewController: UITableViewDataSource {
                 return cell
             }
 
-            if let image = presenter.getImage(atIndex: indexPath.row) {
+            if let image = presenter.getImage(forStoryItem: storyItem) {
                 cell.storyImage = image
-                return cell
-            }
+            } else {
+                cell.cancelImageDownload = { [weak self] in
+                    self?.presenter.cancelImageDownload(forStoryItem: storyItem)
+                }
 
-            cell.storyImage = UIImage(named: "EmptyStory")
-            cell.showImageProgress()
+                presenter.donwloadImage(forStoryItem: storyItem, onSuccess: { image in
+                    cell.storyImage = image
+                    cell.hideImageProgress()
+                }, onFailure: { _ in
+                    cell.hideImageProgress()
+                })
+
+                cell.storyImage = UIImage(named: "EmptyStory")
+                cell.showImageProgress()
+            }
         }
 
         return cell
@@ -109,11 +107,5 @@ extension StoriesViewController: UITableViewDelegate {
             let storyViewController = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
             self.navigationController?.pushViewController(storyViewController, animated: true)
         }
-    }
-
-    public func tableView(_ tableView: UITableView,
-                          didEndDisplaying cell: UITableViewCell,
-                          forRowAt indexPath: IndexPath) {
-        presenter.cancelImageRequest(atIndex: indexPath.row)
     }
 }

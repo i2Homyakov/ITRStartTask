@@ -15,13 +15,3 @@ protocol StoryItemProtocol: TimeProtocol {
 
     func getDateString() -> String
 }
-
-extension StoryItemProtocol {
-    func getImageUrl() -> URL? {
-        if let imageUrl = self.imageUrl {
-            return URL(string: imageUrl)
-        }
-
-        return nil
-    }
-}
