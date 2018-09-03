@@ -28,16 +28,16 @@ class StoryViewController: UIViewController, XibInitializable {
 
         self.title = NSLocalizedString("Story", comment: "")
 
-        replaceBackButton()
-    }
-
-    @objc func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        self.replaceBackButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.show()
+    }
+
+    @objc func backPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     private func replaceBackButton() {

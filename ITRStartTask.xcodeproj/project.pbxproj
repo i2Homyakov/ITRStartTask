@@ -183,9 +183,9 @@
 			children = (
 				1539B81F212DAA7A009C67AC /* Extensions */,
 				1539B80C212D9F5E009C67AC /* Cells */,
+				1539B811212D9F5E009C67AC /* StoryViewProtocol.swift */,
 				1539B80F212D9F5E009C67AC /* StoryViewController.swift */,
 				1539B810212D9F5E009C67AC /* StoryViewController.xib */,
-				1539B811212D9F5E009C67AC /* StoryViewProtocol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

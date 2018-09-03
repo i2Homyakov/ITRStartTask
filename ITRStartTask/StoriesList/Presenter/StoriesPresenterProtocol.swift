@@ -9,6 +9,8 @@
 import Foundation
 
 protocol StoriesPresenterProtocol {
+    func refresh()
+
     func show()
 
     func getStoryItemsCount() -> Int

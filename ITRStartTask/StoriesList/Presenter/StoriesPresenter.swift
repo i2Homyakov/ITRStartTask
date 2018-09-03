@@ -18,6 +18,16 @@ class StoriesPresenter: StoriesPresenterProtocol {
         self.storiesDataProvider = storiesDataProvider
         self.storyItems = []
     }
+    func refresh() {
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
+            self?.storyItems = storyItems
+            self?.view.endRefreshing()
+            self?.view.refreshStories()
+            }, onFailure: { [weak self] (error) in
+                print(error.localizedDescription)
+                self?.view.endRefreshing()
+        })
+    }
 
     func show() {
         if storyItems.count > 0 {
@@ -32,7 +42,6 @@ class StoriesPresenter: StoriesPresenterProtocol {
             self?.view.refreshStories()
             self?.view.hideRootProgress()
         }, onFailure: { [weak self] (error) in
-
             print(error.localizedDescription)
             self?.view.hideRootProgress()
         })

@@ -15,6 +15,7 @@ class StoriesViewController: UIViewController, XibInitializable {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var rootActivityIndicatorView: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class StoriesViewController: UIViewController, XibInitializable {
         self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
                                 forCellReuseIdentifier: StoriesViewController.storyCellId)
         self.tableView.tableFooterView = UIView()
+        self.addRefreshControl()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -38,11 +40,27 @@ class StoriesViewController: UIViewController, XibInitializable {
 
         self.navigationController?.isNavigationBarHidden = false
     }
+
+    @objc func refresh() {
+        presenter.refresh()
+    }
+
+    private func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        let title = NSLocalizedString("Updating", comment: "")
+        refreshControl.attributedTitle = NSAttributedString(string: title)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl)
+    }
 }
 
 extension StoriesViewController: StoriesViewProtocol {
     func refreshStories() {
         self.tableView.reloadData()
+    }
+
+    func endRefreshing() {
+        self.refreshControl.endRefreshing()
     }
 
     func showRootProgress() {

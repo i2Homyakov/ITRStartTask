@@ -11,6 +11,8 @@ import Foundation
 protocol StoriesViewProtocol: class {
     func refreshStories()
 
+    func endRefreshing()
+
     func showRootProgress()
 
     func hideRootProgress()
