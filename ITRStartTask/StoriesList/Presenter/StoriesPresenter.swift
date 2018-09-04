@@ -19,11 +19,11 @@ class StoriesPresenter: StoriesPresenterProtocol {
         self.storyItems = []
     }
     func refresh() {
-        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] storyItems in
             self?.storyItems = storyItems
             self?.view.endRefreshing()
             self?.view.refreshStories()
-            }, onFailure: { [weak self] (error) in
+            }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
                 self?.view.endRefreshing()
         })
@@ -31,17 +31,17 @@ class StoriesPresenter: StoriesPresenterProtocol {
 
     func show() {
         if storyItems.count > 0 {
-            self.view.refreshStories()
+            view.refreshStories()
             return
         }
 
-        self.view.showRootProgress()
+        view.showRootProgress()
 
-        storiesDataProvider.getStoryItems(onSuccess: { [weak self] (storyItems) in
+        storiesDataProvider.getStoryItems(onSuccess: { [weak self] storyItems in
             self?.storyItems = storyItems
             self?.view.refreshStories()
             self?.view.hideRootProgress()
-        }, onFailure: { [weak self] (error) in
+        }, onFailure: { [weak self] error in
             print(error.localizedDescription)
             self?.view.hideRootProgress()
         })

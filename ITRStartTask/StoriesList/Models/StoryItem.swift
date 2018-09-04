@@ -44,7 +44,7 @@ struct StoryItem: StoryItemProtocol, Codable {
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
 
-        let date = self.getDate()
+        let date = getDate()
         let string = formatter.string(from: date)
 
         return string

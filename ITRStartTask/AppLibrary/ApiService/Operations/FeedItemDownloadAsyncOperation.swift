@@ -16,7 +16,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
         case unknownError
 
         func errorCode() -> Int {
-            return self.rawValue
+            return rawValue
         }
 
         func errorLocalizedDescription() -> String {
@@ -34,8 +34,8 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
 
         func error() -> Error {
             return NSError.init(domain: "FeedItemDownloadAsyncOperationError",
-                                code: self.errorCode(),
-                                userInfo: ["localizedDescription": self.errorLocalizedDescription()])
+                                code: errorCode(),
+                                userInfo: ["localizedDescription": errorLocalizedDescription()])
         }
     }
 
@@ -55,10 +55,10 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
             return
         }
 
-        getFeedItem(url: self.url, onSuccess: { [weak self] (feedItem: T) in
+        getFeedItem(url: url, onSuccess: { [weak self] (feedItem: T) in
             self?.storyItem = feedItem
             self?.state = .finished
-        }, onFailure: { [weak self] (error) in
+        }, onFailure: { [weak self] error in
             self?.error = error
             self?.state = .finished
         })
@@ -67,7 +67,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
     private func getFeedItem<T: Codable>(url: URL,
                                          onSuccess: @escaping (T) -> Void,
                                          onFailure: @escaping (Error) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             if let error = error {
                 onFailure(error)
                 return
@@ -77,7 +77,7 @@ class FeedItemDownloadAsyncOperation<T: Codable>: AsyncOperation {
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
                 do {
-                    if let item: T = try self.deserializer.parse(data: data) {
+                    if let item: T = try self?.deserializer.parse(data: data) {
                         onSuccess(item)
                         return
                     }

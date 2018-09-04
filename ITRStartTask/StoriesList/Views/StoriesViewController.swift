@@ -20,25 +20,23 @@ class StoriesViewController: UIViewController, XibInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
 
-        self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
-                                forCellReuseIdentifier: StoriesViewController.storyCellId)
-        self.tableView.tableFooterView = UIView()
-        self.addRefreshControl()
+        tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
+                           forCellReuseIdentifier: StoriesViewController.storyCellId)
+        tableView.tableFooterView = UIView()
+        addRefreshControl()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         presenter.show()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        self.navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
 
     @objc func refresh() {
@@ -50,17 +48,17 @@ class StoriesViewController: UIViewController, XibInitializable {
         let title = NSLocalizedString("Updating", comment: "")
         refreshControl.attributedTitle = NSAttributedString(string: title)
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        self.tableView.addSubview(refreshControl)
+        tableView.addSubview(refreshControl)
     }
 }
 
 extension StoriesViewController: StoriesViewProtocol {
     func refreshStories() {
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
     func endRefreshing() {
-        self.refreshControl.endRefreshing()
+        refreshControl.endRefreshing()
     }
 
     func showRootProgress() {
@@ -80,7 +78,7 @@ extension StoriesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId,
                                                        for: indexPath) as? StoryCell else {
-            return UITableViewCell(frame: .zero)
+                                                        return UITableViewCell(frame: .zero)
         }
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
@@ -96,7 +94,7 @@ extension StoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let storyItem = presenter.getStoryItem(atIndex: indexPath.row) {
             let storyViewController = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
-            self.navigationController?.pushViewController(storyViewController, animated: true)
+            navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
 }
