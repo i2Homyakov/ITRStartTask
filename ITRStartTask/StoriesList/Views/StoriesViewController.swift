@@ -102,19 +102,19 @@ extension StoriesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId,
-                                                       for: indexPath) as? StoryCell else {
-                                                        return UITableViewCell(frame: .zero)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId, for: indexPath)
+
+        guard let storyCell = cell as? StoryCell else {
+            return UITableViewCell()
         }
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
-            cell.title = storyItem.title
-            cell.dateString = storyItem.getDateString()
+            storyCell.title = storyItem.title
+            storyCell.dateString = storyItem.getDateString()
         }
 
-        return cell
+        return storyCell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
