@@ -33,7 +33,7 @@ class StoriesViewController: UIViewController, XibInitializable {
         super.viewDidAppear(animated)
 
         presenter.show()
-        animationView?.animate()
+        animationView?.startAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,4 +109,3 @@ extension StoriesViewController: UITableViewDelegate {
         }
     }
 }
-

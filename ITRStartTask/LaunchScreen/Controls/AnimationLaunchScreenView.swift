@@ -26,7 +26,7 @@ class AnimationLaunchScreenView: UIView {
         commonInit()
     }
 
-    func animate() {
+    func startAnimation() {
         UIView.animate(withDuration: duration, animations: {
             self.alpha = self.targetAlpha
             self.logoView.transform = CGAffineTransform(scaleX: self.targetPart, y: self.targetPart)
