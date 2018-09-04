@@ -14,12 +14,11 @@ class CommentsDataProvider: CommentsDataProviderProtocol {
     func getCommentItems(ids: [Int],
                          onSuccess: @escaping ([CommentItem]) -> Void,
                          onFailure: @escaping (Error) -> Void) {
-        self.apiServiceClient.getCommentItems(ids: ids, onSuccess: { (storyItems) in
+        apiServiceClient.getCommentItems(ids: ids, onSuccess: { storyItems in
             DispatchQueue.main.async {
                 onSuccess(storyItems)
             }
-        }, onFailure: { (error) in
-
+        }, onFailure: { error in
             DispatchQueue.main.async {
                 onFailure(error)
             }

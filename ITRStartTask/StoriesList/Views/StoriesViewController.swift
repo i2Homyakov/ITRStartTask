@@ -16,30 +16,42 @@ class StoriesViewController: UIViewController, XibInitializable {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var rootActivityIndicatorView: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
 
-        self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
-                                forCellReuseIdentifier: StoriesViewController.storyCellId)
-        self.tableView.tableFooterView = UIView()
+        tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
+                           forCellReuseIdentifier: StoriesViewController.storyCellId)
+        tableView.tableFooterView = UIView()
+        addRefreshControl()
         self.addAnimationView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         presenter.show()
         animationView?.startAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
 
-        self.navigationController?.isNavigationBarHidden = false
+    @objc func refresh() {
+        presenter.refresh()
+    }
+
+    private func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        let title = NSLocalizedString("Updating", comment: "")
+        refreshControl.attributedTitle = NSAttributedString(string: title)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
     }
 
     private func addAnimationView() {
@@ -68,7 +80,11 @@ class StoriesViewController: UIViewController, XibInitializable {
 
 extension StoriesViewController: StoriesViewProtocol {
     func refreshStories() {
-        self.tableView.reloadData()
+        tableView.reloadData()
+    }
+
+    func endRefreshing() {
+        refreshControl.endRefreshing()
     }
 
     func showRootProgress() {
@@ -86,26 +102,26 @@ extension StoriesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId,
-                                                       for: indexPath) as? StoryCell else {
-            return UITableViewCell(frame: .zero)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId, for: indexPath)
+
+        guard let storyCell = cell as? StoryCell else {
+            return UITableViewCell()
         }
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
-            cell.title = storyItem.title
-            cell.dateString = storyItem.getDateString()
+            storyCell.title = storyItem.title
+            storyCell.dateString = storyItem.getDateString()
         }
 
-        return cell
+        return storyCell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let storyItem = presenter.getStoryItem(atIndex: indexPath.row) {
             let storyViewController = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
-            self.navigationController?.pushViewController(storyViewController, animated: true)
+            navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
 }

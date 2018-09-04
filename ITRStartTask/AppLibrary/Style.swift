@@ -13,7 +13,7 @@ enum DateFormats: String {
     case short = "yyyy-MM-dd"
 
     func getFormatString() -> String {
-        return self.rawValue
+        return rawValue
     }
 }
 

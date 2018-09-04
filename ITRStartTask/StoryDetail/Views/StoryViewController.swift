@@ -20,19 +20,14 @@ class StoryViewController: UIViewController, XibInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.rootTableView.dataSource = self
-        self.rootTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
+        rootTableView.dataSource = self
+        rootTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.commentCellId)
-        self.rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
+        rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.headerCellId)
 
-        self.title = NSLocalizedString("Story", comment: "")
-
-        replaceBackButton()
-    }
-
-    @objc func backPressed() {
-        self.navigationController?.popViewController(animated: true)
+        title = NSLocalizedString("Story", comment: "")
+        configureBackButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,20 +35,24 @@ class StoryViewController: UIViewController, XibInitializable {
         presenter.show()
     }
 
-    private func replaceBackButton() {
+    @objc func backPressed() {
+        navigationController?.popViewController(animated: true)
+    }
+
+    private func configureBackButton() {
         let button = UIBarButtonItem(image: UIImage(named: "BackButton"),
                                      style: UIBarButtonItemStyle.plain,
                                      target: self,
                                      action: #selector(backPressed))
         button.tintColor = UIColor.black
 
-        self.navigationItem.leftBarButtonItem = button
+        navigationItem.leftBarButtonItem = button
     }
 }
 
 extension StoryViewController: StoryViewProtocol {
     func refreshComments() {
-        self.rootTableView.reloadData()
+        rootTableView.reloadData()
     }
 
     func showRootProgress() {

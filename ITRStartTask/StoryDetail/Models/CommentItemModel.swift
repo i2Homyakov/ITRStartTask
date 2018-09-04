@@ -23,7 +23,7 @@ class CommentItemModel: CommentItemModelProtocol {
         let formatter = DateFormatter()
         formatter.dateFormat = Style.defaultListDateFormat.getFormatString()
 
-        let string = formatter.string(from: self.time)
+        let string = formatter.string(from: time)
 
         return string
     }

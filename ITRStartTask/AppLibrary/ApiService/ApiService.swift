@@ -16,7 +16,7 @@ class ApiService {
         case unknownError
 
         func errorCode() -> Int {
-            return self.rawValue
+            return rawValue
         }
 
         func errorLocalizedDescription() -> String {
@@ -34,8 +34,8 @@ class ApiService {
 
         func error() -> Error {
             return NSError.init(domain: "ApiServiceError",
-                                code: self.errorCode(),
-                                userInfo: ["localizedDescription": self.errorLocalizedDescription()])
+                                code: errorCode(),
+                                userInfo: ["localizedDescription": errorLocalizedDescription()])
         }
     }
 
@@ -45,7 +45,7 @@ class ApiService {
         case bestStories = "beststories"
 
         func name() -> String {
-            return self.rawValue
+            return rawValue
         }
     }
 
@@ -59,7 +59,7 @@ class ApiService {
                         onFailure: @escaping (Error) -> Void) {
         let urlString = "\(ApiService.feedItemsUrl)/\(category).json?"
         let url = URL(string: urlString)
-        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: url!) { [weak self] (data, response, error) in
             if let error = error {
                 onFailure(error)
                 return
@@ -67,8 +67,10 @@ class ApiService {
 
             if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 do {
-                    let ids: [Int] = try self.deserializer.parseArray(fromData: data)
-                    onSuccess(ids)
+                    if let ids: [Int] = try self?.deserializer.parseArray(fromData: data) {
+                        onSuccess(ids)
+                    }
+
                     return
                 } catch let error as NSError {
                     onFailure(error)
@@ -135,19 +137,19 @@ extension ApiService: StoriesApiServiceProtocol {
     func getTopStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
                            onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.topStories.name()
-        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+        getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
     }
 
     func getNewStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
                            onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.newStories.name()
-        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+        getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
     }
 
     func getBestStoryAllIds(onSuccess: @escaping ([Int]) -> Void,
                             onFailure: @escaping (Error) -> Void) {
         let type = StoriesCategory.bestStories.name()
-        self.getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
+        getStoryAllIds(forCategory: type, onSuccess: onSuccess, onFailure: onFailure)
     }
 
     func getStoryItems(ids: [Int],
