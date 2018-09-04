@@ -9,17 +9,17 @@
 import UIKit
 
 class ImageDownloadOperation: AsyncOperation {
-    var url: String
+    var imageUrl: String
     var image: UIImage?
     var error: Error?
 
     init(url: String) {
-        self.url = url
+        self.imageUrl = url
         super.init()
     }
 
     override func main() {
-        self.getImage()
+        self.getImage(forUrl: self.imageUrl)
 
         if isCancelled {
             return
@@ -28,7 +28,7 @@ class ImageDownloadOperation: AsyncOperation {
         self.state = .finished
     }
 
-    private func getImage() {
+    private func getImage(forUrl url: String) {
         if isCancelled {
             return
         }

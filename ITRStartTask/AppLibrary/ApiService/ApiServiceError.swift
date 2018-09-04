@@ -41,6 +41,6 @@ enum ApiServiceError: Int {
     func error() -> Error {
         return NSError.init(domain: "ApiServiceError",
                             code: self.errorCode(),
-                            userInfo: ["localizedDescription": self.errorMessage()])
+                            userInfo: [NSLocalizedDescriptionKey: self.errorMessage()])
     }
 }

@@ -9,7 +9,14 @@
 import Foundation
 
 class Hash {
-    static func get(forString string: String) -> String {
-        return String(string.hashValue)
+    static func hash(forObject object: AnyObject) -> String {
+        assert(object is String, "Type not supported")
+
+        switch object {
+        case let string as String:
+            return String(string.hashValue)
+        default:
+            return ""
+        }
     }
 }

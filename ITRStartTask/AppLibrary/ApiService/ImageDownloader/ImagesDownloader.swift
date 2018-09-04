@@ -15,7 +15,7 @@ class ImagesDownloader: ImagesDownloaderProtocol {
     func getImage(withUrl url: String,
                   onSuccess: @escaping (UIImage) -> Void,
                   onFailure: @escaping (Error) -> Void) {
-        let urlHash = Hash.get(forString: url)
+        let urlHash = Hash.hash(forObject: url as AnyObject)
 
         if self.operations[urlHash] != nil {
             return
@@ -40,7 +40,7 @@ class ImagesDownloader: ImagesDownloaderProtocol {
     }
 
     func cancel(withUrl url: String) {
-        let urlHash = Hash.get(forString: url)
+        let urlHash = Hash.hash(forObject: url as AnyObject)
 
         if let operation = self.operations[urlHash] {
             operation.cancel()
