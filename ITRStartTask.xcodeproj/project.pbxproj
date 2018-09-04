@@ -285,8 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				1503681B213EB6BC00A49342 /* Cells */,
-				1503681E213EB6BC00A49342 /* StoriesViewController.xib */,
 				1503681F213EB6BC00A49342 /* StoriesViewProtocol.swift */,
+				1503681E213EB6BC00A49342 /* StoriesViewController.xib */,
 				15036820213EB6BC00A49342 /* StoriesViewController.swift */,
 			);
 			path = Views;

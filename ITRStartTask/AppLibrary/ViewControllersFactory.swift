@@ -47,7 +47,6 @@ class ViewControllersFactory {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .top)
         let storyImagesDownloader: ImagesDownloaderProtocol = ImagesDownloader()
-
         let presenter = StoriesPresenter(view: view,
                                          storiesDataProvider: dataProvider,
                                          storyImagesDownloader: storyImagesDownloader)
