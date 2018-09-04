@@ -15,3 +15,13 @@ protocol StoryItemProtocol: TimeProtocol {
 
     func getDateString() -> String
 }
+
+extension StoryItemProtocol {
+    func getImageUrlHash() -> String {
+        if let hashValue = self.imageUrl?.hashValue {
+            return String(hashValue)
+        }
+
+        return ""
+    }
+}

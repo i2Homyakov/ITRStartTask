@@ -60,16 +60,16 @@ class StoriesPresenter: StoriesPresenterProtocol {
     }
 
     func getImage(forStoryItem storyItem: StoryItemProtocol) -> UIImage? {
-        let imageHash = self.getImageHash(forStoryItem: storyItem)
+        let imageHash = storyItem.getImageUrlHash()
         return self.storyImages[imageHash]
     }
 
-    func donwloadImage(forStoryItem storyItem: StoryItemProtocol,
+    func downloadImage(forStoryItem storyItem: StoryItemProtocol,
                        onSuccess: @escaping (UIImage) -> Void,
                        onFailure: @escaping (Error) -> Void) {
         if let imageUrl = storyItem.imageUrl {
             self.storyImagesDownloader.getImage(withUrl: imageUrl, onSuccess: { (image) in
-                let imageHash = self.getImageHash(forStoryItem: storyItem)
+                let imageHash = storyItem.getImageUrlHash()
                 self.storyImages[imageHash] = image
                 onSuccess(image)
             }, onFailure: onFailure)
@@ -80,13 +80,5 @@ class StoriesPresenter: StoriesPresenterProtocol {
         if let imageUrl = storyItem.imageUrl {
             self.storyImagesDownloader.cancel(withUrl: imageUrl)
         }
-    }
-
-    private func getImageHash(forStoryItem item: StoryItemProtocol) -> String {
-        if let hashValue = item.imageUrl?.hashValue {
-            return String(hashValue)
-        }
-
-        return ""
     }
 }

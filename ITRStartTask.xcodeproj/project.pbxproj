@@ -50,6 +50,7 @@
 		1580A43021230760009EA6D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1580A42E21230760009EA6D5 /* LaunchScreen.storyboard */; };
 		1580A43B21230761009EA6D5 /* ITRStartTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580A43A21230761009EA6D5 /* ITRStartTaskTests.swift */; };
 		1580A44621230761009EA6D5 /* ITRStartTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580A44521230761009EA6D5 /* ITRStartTaskUITests.swift */; };
+		1592D0F5213E8D3E003AF9F2 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1592D0F4213E8D3E003AF9F2 /* Hash.swift */; };
 		15BF6D2F212AD64F00944A90 /* StoriesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF6D2E212AD64F00944A90 /* StoriesPresenterProtocol.swift */; };
 		15BF6D31212AD6AE00944A90 /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF6D30212AD6AE00944A90 /* StoriesPresenter.swift */; };
 		15BF6D33212ADC5500944A90 /* StoriesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BF6D32212ADC5500944A90 /* StoriesViewProtocol.swift */; };
@@ -128,6 +129,7 @@
 		1580A44121230761009EA6D5 /* ITRStartTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITRStartTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1580A44521230761009EA6D5 /* ITRStartTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITRStartTaskUITests.swift; sourceTree = "<group>"; };
 		1580A44721230761009EA6D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1592D0F4213E8D3E003AF9F2 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
 		15BF6D2E212AD64F00944A90 /* StoriesPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesPresenterProtocol.swift; sourceTree = "<group>"; };
 		15BF6D30212AD6AE00944A90 /* StoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesPresenter.swift; sourceTree = "<group>"; };
 		15BF6D32212ADC5500944A90 /* StoriesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewProtocol.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				156B255E212FD568002F65B3 /* Style.swift */,
 				156B255D212FD568002F65B3 /* TimeProtocol.swift */,
 				156B255C212FD568002F65B3 /* ViewControllersFactory.swift */,
+				1592D0F4213E8D3E003AF9F2 /* Hash.swift */,
 			);
 			path = AppLibrary;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				153A747B21255F21001E233D /* StoriesDataProvider.swift in Sources */,
 				156B256C212FD568002F65B3 /* ViewControllersFactory.swift in Sources */,
 				156B2570212FD568002F65B3 /* ApiService.swift in Sources */,
+				1592D0F5213E8D3E003AF9F2 /* Hash.swift in Sources */,
 				15BF6D3A212AF1F400944A90 /* StoryPresenter.swift in Sources */,
 				1539B814212D9F5E009C67AC /* StoryViewController.swift in Sources */,
 				156B256D212FD568002F65B3 /* TimeProtocol.swift in Sources */,

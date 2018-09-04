@@ -13,5 +13,5 @@ protocol ImagesDownloaderProtocol {
                   onSuccess: @escaping (UIImage) -> Void,
                   onFailure: @escaping (Error) -> Void)
 
-    func cancel(withUrl urlString: String)
+    func cancel(withUrl url: String)
 }

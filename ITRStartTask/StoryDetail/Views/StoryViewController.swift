@@ -37,8 +37,8 @@ class StoryViewController: UIViewController, XibInitializable {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.show()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        presenter.show()
     }
 
     private func replaceBackButton() {

@@ -17,7 +17,7 @@ protocol StoriesPresenterProtocol {
 
     func getImage(forStoryItem storyItem: StoryItemProtocol) -> UIImage?
 
-    func donwloadImage(forStoryItem storyItem: StoryItemProtocol,
+    func downloadImage(forStoryItem storyItem: StoryItemProtocol,
                        onSuccess: @escaping (UIImage) -> Void,
                        onFailure: @escaping (Error) -> Void)
 

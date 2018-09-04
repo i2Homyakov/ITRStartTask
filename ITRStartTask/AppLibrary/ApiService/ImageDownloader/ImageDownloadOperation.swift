@@ -9,17 +9,17 @@
 import UIKit
 
 class ImageDownloadOperation: AsyncOperation {
-    var urlString: String
+    var url: String
     var image: UIImage?
     var error: Error?
 
-    init(urlString: String) {
-        self.urlString = urlString
+    init(url: String) {
+        self.url = url
         super.init()
     }
 
     override func main() {
-        self.getImage(urlString: self.urlString)
+        self.getImage()
 
         if isCancelled {
             return
@@ -28,12 +28,12 @@ class ImageDownloadOperation: AsyncOperation {
         self.state = .finished
     }
 
-    private func getImage(urlString: String) {
+    private func getImage() {
         if isCancelled {
             return
         }
 
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: url) else {
             self.error = ApiServiceError.incorrectUrl.error()
             return
         }

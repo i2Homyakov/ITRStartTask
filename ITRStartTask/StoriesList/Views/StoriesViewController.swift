@@ -83,7 +83,7 @@ extension StoriesViewController: UITableViewDataSource {
                     self?.presenter.cancelImageDownload(forStoryItem: storyItem)
                 }
 
-                presenter.donwloadImage(forStoryItem: storyItem, onSuccess: { image in
+                presenter.downloadImage(forStoryItem: storyItem, onSuccess: { image in
                     cell.storyImage = image
                     cell.hideImageProgress()
                 }, onFailure: { _ in

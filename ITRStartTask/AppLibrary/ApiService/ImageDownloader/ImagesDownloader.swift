@@ -12,16 +12,16 @@ class ImagesDownloader: ImagesDownloaderProtocol {
     private let queue = OperationQueue()
     private var operations: [String: ImageDownloadOperation] = [:]
 
-    func getImage(withUrl urlString: String,
+    func getImage(withUrl url: String,
                   onSuccess: @escaping (UIImage) -> Void,
                   onFailure: @escaping (Error) -> Void) {
-        let urlHash = self.getHash(forString: urlString)
+        let urlHash = Hash.get(forString: url)
 
         if self.operations[urlHash] != nil {
             return
         }
 
-        let operation = ImageDownloadOperation(urlString: urlString)
+        let operation = ImageDownloadOperation(url: url)
 
         operation.completionBlock = {
             DispatchQueue.main.async { [weak self] in
@@ -39,16 +39,12 @@ class ImagesDownloader: ImagesDownloaderProtocol {
         queue.addOperation(operation)
     }
 
-    func cancel(withUrl urlString: String) {
-        let urlHash = self.getHash(forString: urlString)
+    func cancel(withUrl url: String) {
+        let urlHash = Hash.get(forString: url)
 
         if let operation = self.operations[urlHash] {
             operation.cancel()
             self.operations[urlHash] = nil
         }
-    }
-
-    private func getHash(forString string: String) -> String {
-        return String(string.hashValue)
     }
 }
