@@ -15,16 +15,18 @@ class StoriesViewController: UIViewController, XibInitializable {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var rootActivityIndicatorView: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
 
-        self.tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
-                                forCellReuseIdentifier: StoriesViewController.storyCellId)
-        self.tableView.tableFooterView = UIView()
+        tableView.register(UINib(nibName: StoryCell.nibName, bundle: nil),
+                           forCellReuseIdentifier: StoriesViewController.storyCellId)
+        tableView.tableFooterView = UIView()
+        addRefreshControl()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -34,14 +36,29 @@ class StoriesViewController: UIViewController, XibInitializable {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
 
-        self.navigationController?.isNavigationBarHidden = false
+    @objc func refresh() {
+        presenter.refresh()
+    }
+
+    private func addRefreshControl() {
+        refreshControl = UIRefreshControl()
+        let title = NSLocalizedString("Updating", comment: "")
+        refreshControl.attributedTitle = NSAttributedString(string: title)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
     }
 }
 
 extension StoriesViewController: StoriesViewProtocol {
     func refreshStories() {
-        self.tableView.reloadData()
+        tableView.reloadData()
+    }
+
+    func endRefreshing() {
+        refreshControl.endRefreshing()
     }
 
     func showRootProgress() {
@@ -59,51 +76,51 @@ extension StoriesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId,
-                                                       for: indexPath) as? StoryCell else {
-            return UITableViewCell(frame: .zero)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoriesViewController.storyCellId, for: indexPath)
+
+        guard let storyCell = cell as? StoryCell else {
+            return UITableViewCell()
         }
 
-        cell.reset()
+        storyCell.reset()
 
         if let storyItem = presenter?.getStoryItem(atIndex: indexPath.row) {
-            cell.title = storyItem.title
-            cell.dateString = storyItem.getDateString()
+            storyCell.title = storyItem.title
+            storyCell.dateString = storyItem.getDateString()
 
             if storyItem.imageUrl == nil {
-                cell.hideImage()
+                storyCell.hideImage()
                 return cell
             }
 
             if let image = presenter.getImage(forStoryItem: storyItem) {
-                cell.storyImage = image
+                storyCell.storyImage = image
             } else {
-                cell.cancelImageDownload = { [weak self] in
+                storyCell.cancelImageDownload = { [weak self] in
                     self?.presenter.cancelImageDownload(forStoryItem: storyItem)
                 }
 
                 presenter.downloadImage(forStoryItem: storyItem, onSuccess: { image in
-                    cell.storyImage = image
-                    cell.hideImageProgress()
+                    storyCell.storyImage = image
+                    storyCell.hideImageProgress()
                 }, onFailure: { _ in
-                    cell.hideImageProgress()
+                    storyCell.hideImageProgress()
                 })
 
-                cell.storyImage = UIImage(named: "EmptyStory")
-                cell.showImageProgress()
+                storyCell.storyImage = UIImage(named: "EmptyStory")
+                storyCell.showImageProgress()
             }
         }
 
-        return cell
+        return storyCell
     }
-
 }
 
 extension StoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let storyItem = presenter.getStoryItem(atIndex: indexPath.row) {
             let storyViewController = ViewControllersFactory.getStoryViewController(storyItem: storyItem)
-            self.navigationController?.pushViewController(storyViewController, animated: true)
+            navigationController?.pushViewController(storyViewController, animated: true)
         }
     }
 }

@@ -445,6 +445,51 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		15BF6D34212AEF1100944A90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				153A746A21255BD3001E233D /* Cells */,
+				15BF6D32212ADC5500944A90 /* StoriesViewProtocol.swift */,
+				15496D17212BF7AA008231F1 /* StoriesViewController.swift */,
+				15496D18212BF7AA008231F1 /* StoriesViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		15BF6D35212AEF4700944A90 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				15BF6D2E212AD64F00944A90 /* StoriesPresenterProtocol.swift */,
+				15BF6D30212AD6AE00944A90 /* StoriesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		15BF6D38212AF01000944A90 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				15BF6D3B212AF20600944A90 /* StoryPresenterProtocol.swift */,
+				15BF6D39212AF1F400944A90 /* StoryPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		15F5417921351F3A0019C3EA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				15F5417A21351F890019C3EA /* UIVIewController(XibInstance).swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		15F5417C2135236E0019C3EA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				15F5417D2135237C0019C3EA /* XibInitializable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */

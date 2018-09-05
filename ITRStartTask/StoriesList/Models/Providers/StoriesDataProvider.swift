@@ -30,11 +30,11 @@ class StoriesDataProvider: StoriesDataProviderProtocol {
             let maxIdsNumber = StoriesDataProvider.maxIdsNumber
             let ids = ids.count > maxIdsNumber ? Array(ids[0..<maxIdsNumber]) : ids
 
-            self?.apiServiceClient.getStoryItems(ids: ids, onSuccess: { (storyItems) in
+            self?.apiServiceClient.getStoryItems(ids: ids, onSuccess: { storyItems in
                 DispatchQueue.main.async {
                     onSuccess(storyItems)
                 }
-            }, onFailure: { (error) in
+            }, onFailure: { error in
                 DispatchQueue.main.async {
                     onFailure(error)
                 }

@@ -22,17 +22,17 @@ class ViewControllersFactory {
         let categoriesTabBarController = UITabBarController()
         categoriesTabBarController.title = NSLocalizedString("Stories", comment: "")
 
-        let topStoriesViewController = self.getTopStoriesViewController()
+        let topStoriesViewController = getTopStoriesViewController()
         topStoriesViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("TopStories", comment: ""),
                                                  image: UIImage(named: "Like"),
                                                  tag: 0)
 
-        let newStoriesViewController = self.getNewStoriesViewController()
+        let newStoriesViewController = getNewStoriesViewController()
         newStoriesViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("NewStories", comment: ""),
                                                  image: UIImage(named: "New"),
                                                  tag: 0)
 
-        let bestStoriesViewController = self.getBestStoriesViewController()
+        let bestStoriesViewController = getBestStoriesViewController()
         bestStoriesViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("BestStories", comment: ""),
                                                   image: UIImage(named: "Best"),
                                                   tag: 0)

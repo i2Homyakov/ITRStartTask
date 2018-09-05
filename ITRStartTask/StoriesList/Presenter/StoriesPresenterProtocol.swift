@@ -9,6 +9,8 @@
 import UIKit
 
 protocol StoriesPresenterProtocol {
+    func refresh()
+
     func show()
 
     func getStoryItemsCount() -> Int

@@ -10,6 +10,6 @@ import Foundation
 
 extension TimeProtocol {
     func getDate() -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.time))
+        return Date(timeIntervalSince1970: TimeInterval(time))
     }
 }

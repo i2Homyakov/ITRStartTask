@@ -20,15 +20,14 @@ class StoryViewController: UIViewController, XibInitializable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.rootTableView.dataSource = self
-        self.rootTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
+        rootTableView.dataSource = self
+        rootTableView.register(UINib(nibName: CommentCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.commentCellId)
-        self.rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
+        rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.headerCellId)
 
         self.title = NSLocalizedString("Story", comment: "")
-
-        replaceBackButton()
+        configureBackButton()
     }
 
     @objc func backPressed() {
@@ -41,19 +40,19 @@ class StoryViewController: UIViewController, XibInitializable {
         presenter.show()
     }
 
-    private func replaceBackButton() {
+    private func configureBackButton() {
         let button = UIBarButtonItem(image: UIImage(named: "BackButton"),
                                      style: UIBarButtonItemStyle.plain,
                                      target: self,
                                      action: #selector(backPressed))
         button.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItem = button
+        navigationItem.leftBarButtonItem = button
     }
 }
 
 extension StoryViewController: StoryViewProtocol {
     func refreshComments() {
-        self.rootTableView.reloadData()
+        rootTableView.reloadData()
     }
 
     func showRootProgress() {
@@ -82,13 +81,13 @@ extension StoryViewController: UITableViewDataSource {
                 return UITableViewCell(frame: .zero)
             }
 
-        guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
-            return UITableViewCell(frame: .zero)
+            guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
+                return UITableViewCell(frame: .zero)
             }
 
-        commentCell.commentText = commentItem.textAttributedString
-        commentCell.author = commentItem.author
-        commentCell.dateString = commentItem.getFormattedDateString()
+            commentCell.commentText = commentItem.textAttributedString
+            commentCell.author = commentItem.author
+            commentCell.dateString = commentItem.getFormattedDateString()
 
             return cell
         }
