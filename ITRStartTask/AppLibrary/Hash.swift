@@ -10,11 +10,16 @@ import Foundation
 
 class Hash {
     static func hash(forObject object: AnyObject) -> String {
-        if object is String {
-            return String(object.hashValue)
+        if let string = object as? String {
+            if let result = string.md5 {
+                return result
+            }
+
+            assertionFailure("Error md5 hash")
+            return ""
         }
 
-        assert(false, "Type not supported for hash generating")
+        assertionFailure("Type not supported for hash generating")
         return ""
     }
 }

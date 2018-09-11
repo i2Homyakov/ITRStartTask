@@ -18,8 +18,8 @@ protocol StoryItemProtocol: TimeProtocol {
 
 extension StoryItemProtocol {
     func getImageUrlHash() -> String {
-        if let hashValue = self.imageUrl?.hashValue {
-            return String(hashValue)
+        if let imageUrl = self.imageUrl {
+            return Hash.hash(forObject: imageUrl as AnyObject)
         }
 
         return ""
