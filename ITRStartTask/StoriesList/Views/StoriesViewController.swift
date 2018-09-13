@@ -10,7 +10,6 @@ import UIKit
 
 class StoriesViewController: UIViewController, XibInitializable {
     fileprivate static let storyCellId = "storyCell"
-    private weak var animationView: AnimationLaunchScreenView?
 
     var presenter: StoriesPresenterProtocol!
 
@@ -28,13 +27,11 @@ class StoriesViewController: UIViewController, XibInitializable {
                            forCellReuseIdentifier: StoriesViewController.storyCellId)
         tableView.tableFooterView = UIView()
         addRefreshControl()
-        self.addAnimationView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.show()
-        animationView?.startAnimation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,29 +49,6 @@ class StoriesViewController: UIViewController, XibInitializable {
         refreshControl.attributedTitle = NSAttributedString(string: title)
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(refreshControl)
-    }
-
-    private func addAnimationView() {
-        let animationView = AnimationLaunchScreenView(frame: UIScreen.main.bounds)
-
-        if let window = UIApplication.shared.keyWindow {
-            window.addSubview(animationView)
-            animationView.translatesAutoresizingMaskIntoConstraints = false
-            self.animationView = animationView
-            let views = ["animationView": animationView]
-
-            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[animationView]|",
-                                                             options: [],
-                                                             metrics: nil,
-                                                             views: views)
-
-            constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[animationView]|",
-                                                          options: [],
-                                                          metrics: nil,
-                                                          views: views)
-
-            window.addConstraints(constraints)
-        }
     }
 }
 
@@ -108,9 +82,34 @@ extension StoriesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        if let storyItem = presenter?.getStoryItem(atIndex: indexPath.item) {
+        storyCell.reset()
+
+        if let storyItem = presenter?.getStoryItem(atIndex: indexPath.row) {
             storyCell.title = storyItem.title
             storyCell.dateString = storyItem.getDateString()
+
+            if storyItem.imageUrl == nil {
+                storyCell.hideImage()
+                return cell
+            }
+
+            if let image = presenter.getImage(forStoryItem: storyItem) {
+                storyCell.storyImage = image
+            } else {
+                storyCell.cancelImageDownload = { [weak self] in
+                    self?.presenter.cancelImageDownload(forStoryItem: storyItem)
+                }
+
+                presenter.downloadImage(forStoryItem: storyItem, onSuccess: { image in
+                    storyCell.storyImage = image
+                    storyCell.hideImageProgress()
+                }, onFailure: { _ in
+                    storyCell.hideImageProgress()
+                })
+
+                storyCell.storyImage = UIImage(named: "EmptyStory")
+                storyCell.showImageProgress()
+            }
         }
 
         return storyCell

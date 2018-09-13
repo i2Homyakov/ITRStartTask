@@ -6,17 +6,26 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class StoriesPresenter: StoriesPresenterProtocol {
-    unowned let view: StoriesViewProtocol
-    private var storiesDataProvider: StoriesDataProviderProtocol
     fileprivate var storyItems: [StoryItem]
+    unowned let view: StoriesViewProtocol
 
-    init(view: StoriesViewProtocol, storiesDataProvider: StoriesDataProviderProtocol) {
-        self.view = view
-        self.storiesDataProvider = storiesDataProvider
+    private var storiesDataProvider: StoriesDataProviderProtocol
+    private var storyImagesDownloader: ImagesDownloaderProtocol
+
+    var storyImages: [String: UIImage]
+
+    init(view: StoriesViewProtocol,
+         storiesDataProvider: StoriesDataProviderProtocol,
+         storyImagesDownloader: ImagesDownloaderProtocol) {
         self.storyItems = []
+        self.storyImages = [:]
+        self.view = view
+
+        self.storiesDataProvider = storiesDataProvider
+        self.storyImagesDownloader = storyImagesDownloader
     }
     func refresh() {
         storiesDataProvider.getStoryItems(onSuccess: { [weak self] storyItems in
@@ -57,5 +66,28 @@ class StoriesPresenter: StoriesPresenterProtocol {
         }
 
         return nil
+    }
+
+    func getImage(forStoryItem storyItem: StoryItemProtocol) -> UIImage? {
+        let imageHash = storyItem.getImageUrlHash()
+        return self.storyImages[imageHash]
+    }
+
+    func downloadImage(forStoryItem storyItem: StoryItemProtocol,
+                       onSuccess: @escaping (UIImage) -> Void,
+                       onFailure: @escaping (Error) -> Void) {
+        if let imageUrl = storyItem.imageUrl {
+            self.storyImagesDownloader.getImage(withUrl: imageUrl, onSuccess: { (image) in
+                let imageHash = storyItem.getImageUrlHash()
+                self.storyImages[imageHash] = image
+                onSuccess(image)
+            }, onFailure: onFailure)
+        }
+    }
+
+    func cancelImageDownload(forStoryItem storyItem: StoryItemProtocol) {
+        if let imageUrl = storyItem.imageUrl {
+            self.storyImagesDownloader.cancel(withUrl: imageUrl)
+        }
     }
 }

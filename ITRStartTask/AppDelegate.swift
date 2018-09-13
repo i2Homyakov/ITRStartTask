@@ -20,9 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rootViewController = ViewControllersFactory.getStoryCategoriesTabBarController()
         let navigationVontroller = UINavigationController(rootViewController: rootViewController)
+        let animationLaunchScreenView = AnimationLaunchScreenView(frame: UIScreen.main.bounds)
+
+        if let rootView = navigationVontroller.view {
+            rootView.addSubview(animationLaunchScreenView)
+            animationLaunchScreenView.stretchToSuperview()
+        }
 
         window.rootViewController = navigationVontroller
         window.makeKeyAndVisible()
+
+        DispatchQueue.main.async {
+            animationLaunchScreenView.startAnimation()
+        }
 
         return true
     }

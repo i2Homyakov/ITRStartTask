@@ -46,7 +46,10 @@ class ViewControllersFactory {
     private static func getTopStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .top)
-        let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
+        let storyImagesDownloader: ImagesDownloaderProtocol = ImagesDownloader()
+        let presenter = StoriesPresenter(view: view,
+                                         storiesDataProvider: dataProvider,
+                                         storyImagesDownloader: storyImagesDownloader)
         view.presenter = presenter
 
         return view
@@ -55,7 +58,10 @@ class ViewControllersFactory {
     private static func getNewStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .new)
-        let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
+        let storyImagesDownloader: ImagesDownloaderProtocol = ImagesDownloader()
+        let presenter = StoriesPresenter(view: view,
+                                         storiesDataProvider: dataProvider,
+                                         storyImagesDownloader: storyImagesDownloader)
         view.presenter = presenter
 
         return view
@@ -64,7 +70,10 @@ class ViewControllersFactory {
     private static func getBestStoriesViewController() -> UIViewController {
         let view: StoriesViewController = StoriesViewController.xibInstance()
         let dataProvider: StoriesDataProviderProtocol = StoriesDataProvider(category: .best)
-        let presenter = StoriesPresenter(view: view, storiesDataProvider: dataProvider)
+        let storyImagesDownloader: ImagesDownloaderProtocol = ImagesDownloader()
+        let presenter = StoriesPresenter(view: view,
+                                         storiesDataProvider: dataProvider,
+                                         storyImagesDownloader: storyImagesDownloader)
         view.presenter = presenter
 
         return view

@@ -46,3 +46,24 @@ class AnimationLaunchScreenView: UIView {
         }
     }
 }
+
+extension AnimationLaunchScreenView {
+    func stretchToSuperview() {
+        if let superview = superview {
+            self.translatesAutoresizingMaskIntoConstraints = false
+            let views = ["view": self]
+
+            var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
+                                                             options: [],
+                                                             metrics: nil,
+                                                             views: views)
+
+            constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
+                                                          options: [],
+                                                          metrics: nil,
+                                                          views: views)
+
+            superview.addConstraints(constraints)
+        }
+    }
+}

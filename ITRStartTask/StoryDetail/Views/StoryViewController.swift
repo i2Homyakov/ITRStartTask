@@ -26,17 +26,18 @@ class StoryViewController: UIViewController, XibInitializable {
         rootTableView.register(UINib(nibName: StoryHeaderCell.nibName, bundle: nil),
                                         forCellReuseIdentifier: StoryViewController.headerCellId)
 
-        title = NSLocalizedString("Story", comment: "")
+        self.title = NSLocalizedString("Story", comment: "")
         configureBackButton()
+    }
+
+    @objc func backPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         presenter.show()
-    }
-
-    @objc func backPressed() {
-        navigationController?.popViewController(animated: true)
     }
 
     private func configureBackButton() {
@@ -45,7 +46,6 @@ class StoryViewController: UIViewController, XibInitializable {
                                      target: self,
                                      action: #selector(backPressed))
         button.tintColor = UIColor.black
-
         navigationItem.leftBarButtonItem = button
     }
 }
@@ -81,13 +81,13 @@ extension StoryViewController: UITableViewDataSource {
                 return UITableViewCell(frame: .zero)
             }
 
-        guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
-            return UITableViewCell(frame: .zero)
+            guard let commentItem = presenter?.getCommentItem(atIndex: indexPath.item) else {
+                return UITableViewCell(frame: .zero)
             }
 
-        commentCell.commentText = commentItem.textAttributedString
-        commentCell.author = commentItem.author
-        commentCell.dateString = commentItem.getFormattedDateString()
+            commentCell.commentText = commentItem.textAttributedString
+            commentCell.author = commentItem.author
+            commentCell.dateString = commentItem.getFormattedDateString()
 
             return cell
         }

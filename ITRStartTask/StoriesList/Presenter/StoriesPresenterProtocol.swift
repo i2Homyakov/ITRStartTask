@@ -6,7 +6,7 @@
 //  Copyright © 2018 Homyakov, Ilya2. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol StoriesPresenterProtocol {
     func refresh()
@@ -17,4 +17,11 @@ protocol StoriesPresenterProtocol {
 
     func getStoryItem(atIndex: Int) -> StoryItemProtocol?
 
+    func getImage(forStoryItem storyItem: StoryItemProtocol) -> UIImage?
+
+    func downloadImage(forStoryItem storyItem: StoryItemProtocol,
+                       onSuccess: @escaping (UIImage) -> Void,
+                       onFailure: @escaping (Error) -> Void)
+
+    func cancelImageDownload(forStoryItem storyItem: StoryItemProtocol)
 }
